@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
+from cereal import car
 from openpilot.common.params import Params
+from openpilot.selfdrive.car.cruise import CRUISE_LONG_PRESS
 from openpilot.selfdrive.selfdrived.events import ET
 
 from openpilot.frogpilot.common.frogpilot_variables import NON_DRIVING_GEARS
+from openpilot.frogpilot.controls.lib.conditional_experimental_mode import CEStatus
+
+ButtonType = car.CarState.ButtonEvent.Type
 
 class FrogPilotCard:
   def __init__(self, CP):
@@ -12,6 +17,45 @@ class FrogPilotCard:
     self.params_memory = Params(memory=True)
 
     self.always_on_lateral_allowed = False
+    self.prev_distance_button = False
+
+    self.gap_counter = 0
+
+    self.long_press_threshold = CRUISE_LONG_PRESS * (1.5 if self.CP.brand == "gm" else 1)
+    self.very_long_press_threshold = CRUISE_LONG_PRESS * 5
+
+  def handle_experimental_mode(self, conditional_experimental_mode, sm):
+    if conditional_experimental_mode:
+      conditional_status = self.params_memory.get("CEStatus")
+
+      if conditional_status in (CEStatus.USER_DISABLED, CEStatus.USER_OVERRIDDEN):
+        override_value = CEStatus.OFF
+      elif conditional_status != CEStatus.OFF:
+        override_value = CEStatus.USER_DISABLED
+      else:
+        override_value = CEStatus.USER_OVERRIDDEN
+
+      self.params_memory.put("CEStatus", override_value)
+    else:
+      self.params.put_bool_nonblocking("ExperimentalMode", not sm["selfdriveState"].experimentalMode)
+
+  def update_distance_button(self, sm, frogpilot_toggles):
+    if frogpilot_toggles.experimental_mode_via_distance and sm["carControl"].longActive:
+      self.handle_experimental_mode(frogpilot_toggles.conditional_experimental_mode)
+
+  def update_distance_button_long(self, sm, frogpilot_toggles):
+    if frogpilot_toggles.experimental_mode_via_distance_long and sm["carControl"].longActive:
+      self.handle_experimental_mode(frogpilot_toggles.conditional_experimental_mode)
+
+  def update_distance_button_very_long(self, sm, frogpilot_toggles):
+    self.update_distance_button_long(sm, frogpilot_toggles)
+
+    if frogpilot_toggles.experimental_mode_via_distance_very_long and sm["carControl"].longActive:
+      self.handle_experimental_mode(frogpilot_toggles.conditional_experimental_mode)
+
+  def update_lkas_button(self, sm, frogpilot_toggles):
+    if frogpilot_toggles.experimental_mode_via_lkas and sm["carControl"].longActive:
+      self.handle_experimental_mode(frogpilot_toggles.conditional_experimental_mode)
 
   def update(self, carState, frogpilotCarState, sm, frogpilot_toggles):
     if self.CP.brand == "hyundai":
@@ -32,6 +76,27 @@ class FrogPilotCard:
     self.always_on_lateral_enabled &= sm["selfdriveState"].alertType != ET.IMMEDIATE_DISABLE or frogpilot_toggles.frogs_go_moo
     self.always_on_lateral_enabled &= not (carState.brakePressed and carState.vEgo < frogpilot_toggles.always_on_lateral_pause_speed or carState.standstill)
 
+    if frogpilotCarState.distancePressed:
+      self.gap_counter += 1
+    elif not self.prev_distance_button:
+      self.gap_counter = 0
+
+    if not frogpilotCarState.distancePressed and 1 < self.gap_counter < self.long_press_threshold:
+      self.update_distance_button(sm, frogpilot_toggles)
+    elif self.gap_counter == self.long_press_threshold:
+      self.update_distance_button_long(sm, frogpilot_toggles)
+    elif self.gap_counter == self.very_long_press_threshold:
+      self.update_distance_button_very_long(sm, frogpilot_toggles)
+
+    lkas_button = any(be.pressed and be.type == ButtonType.lkas for be in carState.buttonEvents)
+
+    if lkas_button:
+      self.update_lkas_button(sm, frogpilot_toggles)
+
+    self.prev_distance_button = frogpilotCarState.distancePressed
+
     frogpilotCarState.alwaysOnLateralEnabled = self.always_on_lateral_enabled
+    frogpilotCarState.distanceLongPressed = self.very_long_press_threshold > self.gap_counter >= self.long_press_threshold
+    frogpilotCarState.distanceVeryLongPressed = self.gap_counter >= self.very_long_press_threshold
 
     return frogpilotCarState
