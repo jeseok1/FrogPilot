@@ -235,6 +235,10 @@ class CarInterfaceBase(ABC):
         if 0x2FF in fingerprint[0] or (0x2AA in fingerprint[0] and candidate in NO_DSU_CAR):
           fp_ret.flags |= ToyotaFrogPilotFlags.SMART_DSU.value
 
+        if candidate == ToyotaCAR.TOYOTA_PRIUS:
+          if 0x23 in fingerprint[0]:
+            fp_ret.flags |= ToyotaFrogPilotFlags.ZSS.value
+
       fp_ret.openpilotLongitudinalControlDisabled = frogpilot_toggles.disable_openpilot_long
 
     return fp_ret
