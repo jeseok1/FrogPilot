@@ -11,7 +11,7 @@ from openpilot.common.time_helpers import system_time_valid
 from openpilot.frogpilot.assets.model_manager import MODEL_DOWNLOAD_ALL_PARAM, MODEL_DOWNLOAD_PARAM, ModelManager
 from openpilot.frogpilot.assets.theme_manager import THEME_COMPONENT_PARAMS, ThemeManager
 from openpilot.frogpilot.common.frogpilot_functions import backup_toggles
-from openpilot.frogpilot.common.frogpilot_utilities import flash_panda, is_url_pingable, lock_doors, run_thread_with_lock, update_openpilot
+from openpilot.frogpilot.common.frogpilot_utilities import flash_panda, is_url_pingable, lock_doors, run_thread_with_lock, update_maps, update_openpilot
 from openpilot.frogpilot.common.frogpilot_variables import ERROR_LOGS_PATH, FrogPilotVariables, get_frogpilot_toggles
 from openpilot.frogpilot.controls.frogpilot_planner import FrogPilotPlanner
 from openpilot.frogpilot.controls.lib.frogpilot_tracking import FrogPilotTracking
@@ -40,6 +40,8 @@ def assets_checks(model_manager, theme_manager, params_memory, frogpilot_toggles
 def update_checks(now, model_manager, theme_manager, params, params_memory, frogpilot_toggles, boot_run=False):
   while not (is_url_pingable("https://github.com") or is_url_pingable("https://gitlab.com")):
     time.sleep(60)
+
+  run_thread_with_lock("update_maps", update_maps, (now, params, params_memory))
 
   model_manager.update_models(boot_run)
   theme_manager.update_themes(frogpilot_toggles, boot_run)
