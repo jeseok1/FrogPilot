@@ -14,6 +14,7 @@ static void update_state(FrogPilotUIState *fs) {
   }
   if (sm.updated("deviceState")) {
     const cereal::DeviceState::Reader &deviceState = sm["deviceState"].getDeviceState();
+    frogpilot_scene.online = deviceState.getNetworkType() != cereal::DeviceState::NetworkType::NONE;
   }
   if (sm.updated("selfdriveState")) {
     const cereal::SelfdriveState::Reader &selfdriveState = sm["selfdriveState"].getSelfdriveState();
