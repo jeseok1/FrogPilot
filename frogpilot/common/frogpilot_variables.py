@@ -377,9 +377,13 @@ class FrogPilotVariables:
     toggle.color_scheme = self.params.get("ColorScheme") if custom_themes else "stock"
     toggle.distance_icons = self.params.get("DistanceIconPack") if custom_themes else "stock"
     toggle.icon_pack = self.params.get("IconPack") if custom_themes else "stock"
+    toggle.random_themes = custom_themes and (self.params.get_bool("RandomThemes") if tuning_level >= level["RandomThemes"] else default["RandomThemes"])
     toggle.signal_icons = self.params.get("SignalAnimation") if custom_themes else "stock"
     toggle.sound_pack = self.params.get("SoundPack") if custom_themes else "stock"
-    toggle.wheel_image = next((file.resolve().stem for file in (ACTIVE_THEME_PATH / "steering_wheel").glob("wheel.*")), "stock")
+    if not toggle.random_themes:
+      toggle.wheel_image = self.params.get("WheelIcon") if custom_themes else "stock"
+    else:
+      toggle.wheel_image = next((file.resolve().stem for file in (ACTIVE_THEME_PATH / "steering_wheel").glob("wheel.*")), "stock")
 
     custom_ui = self.params.get_bool("CustomUI") if tuning_level >= level["CustomUI"] else default["CustomUI"]
     toggle.acceleration_path = toggle.openpilot_longitudinal and (custom_ui and (self.params.get_bool("AccelerationPath") if tuning_level >= level["AccelerationPath"] else default["AccelerationPath"]) or toggle.debug_mode)
