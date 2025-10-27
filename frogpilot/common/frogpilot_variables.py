@@ -2,6 +2,7 @@
 import numpy as np
 import os
 import random
+import tomllib
 
 from functools import cache
 from pathlib import Path
@@ -13,7 +14,7 @@ from cereal import car, custom, log
 from opendbc.car import gen_empty_fingerprint
 from opendbc.car.car_helpers import interfaces
 from opendbc.car.gm.values import GMFlags
-from opendbc.car.interfaces import CarInterfaceBase
+from opendbc.car.interfaces import TORQUE_SUBSTITUTE_PATH, CarInterfaceBase
 from opendbc.car.mock.interface import CarInterface
 from opendbc.car.mock.values import CAR as MOCK
 from opendbc.car.subaru.values import SubaruFlags
@@ -69,6 +70,8 @@ KONIK_PATH = Path("/cache/use_konik")
 MAPD_PATH = Path("/data/media/0/osm/mapd")
 MAPS_PATH = Path("/data/media/0/osm/offline")
 
+NNFF_MODELS_PATH = Path(BASEDIR) / "frogpilot/assets/nnff_models"
+
 BUTTON_FUNCTIONS = {
   "NOTHING": 0,
   "PERSONALITY_PROFILE": 1,
@@ -91,6 +94,33 @@ TINYGRAD_FILES = [
   ("driving_vision_metadata.pkl", "vision metadata"),
   ("driving_vision_tinygrad.pkl", "vision model"),
 ]
+
+@cache
+def get_nnff_model_files():
+  return [file.stem for file in NNFF_MODELS_PATH.iterdir() if file.is_file()]
+
+@cache
+def get_nnff_substitutes():
+  substitutes = {}
+  with open(TORQUE_SUBSTITUTE_PATH, "rb") as f:
+    substitutes_data = tomllib.load(f)
+    substitutes = {key: value for key, value in substitutes_data.items()}
+  return substitutes
+
+def nnff_supported(car_fingerprint):
+  model_files = get_nnff_model_files()
+  substitutes = get_nnff_substitutes()
+
+  fingerprints_to_check = [car_fingerprint]
+  if car_fingerprint in substitutes:
+    fingerprints_to_check.append(substitutes[car_fingerprint])
+
+  for fingerprint in fingerprints_to_check:
+    for file in model_files:
+      if file.startswith(fingerprint):
+        return True
+
+  return False
 
 def get_frogpilot_toggles():
   if not hasattr(get_frogpilot_toggles, "_params_memory"):
@@ -205,6 +235,7 @@ class FrogPilotVariables:
     friction = CP.lateralTuning.torque.friction
     has_bsm = CP.enableBsm
     toggle.has_cc_long = toggle.car_make == "gm" and bool(CP.flags & GMFlags.CC_LONG.value)
+    has_nnff = nnff_supported(toggle.car_model)
     toggle.has_pedal = CP.enableGasInterceptorDEPRECATED
     has_radar = not CP.radarUnavailable
     toggle.has_sdsu = toggle.car_make == "toyota" and bool(FPCP.flags & ToyotaFrogPilotFlags.SMART_DSU.value)
@@ -455,6 +486,8 @@ class FrogPilotVariables:
 
     lateral_tuning = self.params.get_bool("LateralTune") if tuning_level >= level["LateralTune"] else default["LateralTune"]
     toggle.force_torque_controller = lateral_tuning and not is_torque_car and (self.params.get_bool("ForceTorqueController") if tuning_level >= level["ForceTorqueController"] else default["ForceTorqueController"])
+    toggle.nnff = lateral_tuning and has_nnff and not is_angle_car and (self.params.get_bool("NNFF") if tuning_level >= level["NNFF"] else default["NNFF"])
+    toggle.nnff_lite = not toggle.nnff and lateral_tuning and not is_angle_car and (self.params.get_bool("NNFFLite") if tuning_level >= level["NNFFLite"] else default["NNFFLite"])
     toggle.use_turn_desires = lateral_tuning and (self.params.get_bool("TurnDesires") if tuning_level >= level["TurnDesires"] else default["TurnDesires"])
 
     lkas_button_control = (self.params.get("LKASButtonControl") if tuning_level >= level["LKASButtonControl"] else default["LKASButtonControl"]) if toggle.car_make != "subaru" else 0
