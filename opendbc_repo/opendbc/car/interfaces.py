@@ -23,7 +23,7 @@ from opendbc.car.honda.values import CAR as HondaCAR, HONDA_BOSCH, HondaFrogPilo
 from opendbc.car.hyundai.hyundaicanfd import CanBus
 from opendbc.car.hyundai.values import CAR as HyundaiCAR, CANFD_CAR, HyundaiFrogPilotFlags, HyundaiFrogPilotSafetyFlags, HyundaiSafetyFlags
 from opendbc.car.mock.values import CAR as MockCAR
-from opendbc.car.toyota.values import CAR as ToyotaCAR, TSS2_CAR, UNSUPPORTED_DSU_CAR, ToyotaFrogPilotFlags, ToyotaFrogPilotSafetyFlags, ToyotaSafetyFlags
+from opendbc.car.toyota.values import CAR as ToyotaCAR, NO_DSU_CAR, TSS2_CAR, UNSUPPORTED_DSU_CAR, ToyotaFrogPilotFlags, ToyotaFrogPilotSafetyFlags, ToyotaSafetyFlags
 from opendbc.car.values import PLATFORMS
 from opendbc.can import CANParser
 
@@ -222,6 +222,9 @@ class CarInterfaceBase(ABC):
 
         if CP.enableGasInterceptorDEPRECATED:
           fp_ret.safetyConfigs[0].safetyParam |= ToyotaFrogPilotSafetyFlags.GAS_INTERCEPTOR
+
+        if 0x2FF in fingerprint[0] or (0x2AA in fingerprint[0] and candidate in NO_DSU_CAR):
+          fp_ret.flags |= ToyotaFrogPilotFlags.SMART_DSU.value
 
       fp_ret.openpilotLongitudinalControlDisabled = frogpilot_toggles.disable_openpilot_long
 
