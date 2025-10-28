@@ -15,6 +15,7 @@ public:
   void paintBlindSpotPath(QPainter &p, SubMaster &fpsm, const FrogPilotUIScene &frogpilot_scene);
   void paintFrogPilotWidgets(QPainter &p, UIState &s, FrogPilotUIState &fs, SubMaster &sm, SubMaster &fpsm, QJsonObject &frogpilot_toggles);
   void paintLeadMetrics(QPainter &p, bool adjacent, QPointF *chevron, SubMaster &fpsm, const cereal::RadarState::LeadData::Reader &lead_data);
+  void paintPathEdges(QPainter &p, const UIScene &scene, const FrogPilotUIScene &frogpilot_scene, SubMaster &sm);
   void updateState(const FrogPilotUIState &fs, const QJsonObject &frogpilot_toggles);
 
   bool hideBottomIcons;

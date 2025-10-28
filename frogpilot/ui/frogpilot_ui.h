@@ -43,6 +43,7 @@ struct FrogPilotUIScene {
   QPointF lead_vertices[2];
 
   QPolygonF track_adjacent_vertices[2];
+  QPolygonF track_edge_vertices;
 };
 
 class FrogPilotUIState : public QObject {
