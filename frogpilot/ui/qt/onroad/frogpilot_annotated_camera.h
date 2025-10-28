@@ -53,6 +53,7 @@ private:
   void paintCurveSpeedControlTraining(QPainter &p, SubMaster &fpsm);
   void paintPedalIcons(QPainter &p, SubMaster &fpsm, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles);
   void paintRadarTracks(QPainter &p, UIState &s, FrogPilotUIScene &frogpilot_scene, SubMaster &sm, SubMaster &fpsm);
+  void paintRoadName(QPainter &p);
   void paintStoppingPoint(QPainter &p, UIScene &scene, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles);
   void paintTurnSignals(QPainter &p, SubMaster &fpsm);
   void updateSignals();
