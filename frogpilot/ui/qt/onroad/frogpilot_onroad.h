@@ -17,6 +17,7 @@ public:
 private:
   void paintEvent(QPaintEvent *event);
   void paintFPS(QPainter &p, const QRect &rect);
+  void paintSteeringTorqueBorder(QPainter &p, const QRect &rect);
   void paintTurnSignalBorder(QPainter &p, const QRect &rect);
 
   bool blindSpotLeft;
@@ -24,6 +25,9 @@ private:
   bool flickerActive;
   bool showBlindspot;
   bool showFPS;
+  bool showSteering;
+
+  float torque;
 
   QTimer *signalTimer;
 };
