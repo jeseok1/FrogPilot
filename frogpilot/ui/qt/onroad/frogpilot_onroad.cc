@@ -19,12 +19,15 @@ void FrogPilotOnroadWindow::updateState(const UIState &s, const FrogPilotUIState
   blindSpotLeft = carState.getLeftBlindspot();
   blindSpotRight = carState.getRightBlindspot();
   torque = -carControl.getActuators().getTorque();
+  turnSignalLeft = carState.getLeftBlinker();
+  turnSignalRight = carState.getRightBlinker();
 
   showBlindspot = (blindSpotLeft || blindSpotRight) && frogpilot_toggles.value("blind_spot_metrics").toBool();
   showFPS = frogpilot_toggles.value("show_fps").toBool();
+  showSignal = (turnSignalLeft || turnSignalRight) && frogpilot_toggles.value("signal_metrics").toBool();
   showSteering = frogpilot_toggles.value("steering_metrics").toBool();
 
-  if (showBlindspot || showFPS || showSteering) {
+  if (showBlindspot || showFPS || showSignal || showSteering) {
     update();
   }
 }
@@ -50,8 +53,8 @@ void FrogPilotOnroadWindow::paintEvent(QPaintEvent *event) {
     paintSteeringTorqueBorder(p, rect);
   }
 
-  if (showBlindspot) {
-    int interval = 250;
+  if (showBlindspot || showSignal) {
+    int interval = showBlindspot ? 250 : 500;
 
     if (!signalTimer->isActive()) {
       signalTimer->start(interval);

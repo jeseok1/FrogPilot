@@ -25,7 +25,10 @@ private:
   bool flickerActive;
   bool showBlindspot;
   bool showFPS;
+  bool showSignal;
   bool showSteering;
+  bool turnSignalLeft;
+  bool turnSignalRight;
 
   float torque;
 
