@@ -180,6 +180,10 @@ void FrogPilotAnnotatedCameraWidget::paintFrogPilotWidgets(QPainter &p, UIState 
     paintPedalIcons(p, fpsm, frogpilot_scene, frogpilot_toggles);
   }
 
+  if (frogpilot_toggles.value("radar_tracks").toBool()) {
+    paintRadarTracks(p, s, frogpilot_scene, sm, fpsm);
+  }
+
   if (track_vertices.length() >= 1 && frogpilotPlan.getRedLight() && frogpilot_toggles.value("show_stopping_point").toBool()) {
     paintStoppingPoint(p, scene, frogpilot_scene, frogpilot_toggles);
   }
@@ -444,6 +448,31 @@ void FrogPilotAnnotatedCameraWidget::paintPedalIcons(QPainter &p, SubMaster &fps
 
   p.setOpacity(gasOpacity);
   p.drawPixmap(startX + btn_size / 2, startY, gasPedalImg);
+
+  p.restore();
+}
+
+void FrogPilotAnnotatedCameraWidget::paintRadarTracks(QPainter &p, UIState &s, FrogPilotUIScene &frogpilot_scene, SubMaster &sm, SubMaster &fpsm) {
+  const cereal::ModelDataV2::Reader &model = sm["modelV2"].getModelV2();
+  const capnp::List<cereal::LiveTracks>::Reader &liveTracks = fpsm["liveTracks"].getLiveTracks();
+
+  p.save();
+
+  update_radar_tracks(liveTracks, model.getPosition(), s, sm);
+
+  int diameter = 25;
+
+  QRect viewport = p.viewport();
+
+  for (std::size_t i = 0; i < frogpilot_scene.live_radar_tracks.size(); ++i) {
+    const RadarTrackData &track = frogpilot_scene.live_radar_tracks[i];
+
+    float x = std::clamp(static_cast<float>(track.calibrated_point.x()), 0.0f, float(viewport.width() - diameter));
+    float y = std::clamp(static_cast<float>(track.calibrated_point.y()), 0.0f, float(viewport.height() - diameter));
+
+    p.setBrush(redColor());
+    p.drawEllipse(QPointF(x + diameter / 2.0f, y + diameter / 2.0f), diameter / 2.0f, diameter / 2.0f);
+  }
 
   p.restore();
 }

@@ -5,6 +5,10 @@
 
 #include "frogpilot/ui/qt/widgets/frogpilot_controls.h"
 
+struct RadarTrackData {
+  QPointF calibrated_point;
+};
+
 struct FrogPilotUIScene {
   bool always_on_lateral_active;
   bool downloading_update;
@@ -20,6 +24,8 @@ struct FrogPilotUIScene {
   int conditional_status;
   int model_length;
   int started_timer;
+
+  std::vector<RadarTrackData> live_radar_tracks;
 
   QColor lane_lines_color;
   QColor lead_marker_color;
