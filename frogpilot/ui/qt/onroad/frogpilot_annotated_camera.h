@@ -21,10 +21,13 @@ public:
 
   bool hideBottomIcons;
   bool isCruiseSet;
+  bool mutcdSpeedLimit;
   bool rightHandDM;
+  bool viennaSpeedLimit;
 
   int alertHeight;
   int frogHopCount;
+  int signMargin;
   int standstillDuration;
 
   float distanceConversion;
@@ -41,6 +44,9 @@ public:
   QPolygonF track_vertices;
 
   QRect leadTextRect;
+  QRect newSpeedLimitRect;
+  QRect setSpeedRect;
+  QRect speedLimitRect;
 
   QSize defaultSize;
 
@@ -48,6 +54,7 @@ public:
   QString leadDistanceUnit;
   QString leadSpeedUnit;
   QString signalStyle;
+  QString speedLimitOffsetStr;
   QString speedUnit;
 
 protected:
@@ -61,8 +68,10 @@ private:
   void paintLateralPaused(QPainter &p, FrogPilotUIScene &frogpilot_scene);
   void paintLongitudinalPaused(QPainter &p, FrogPilotUIScene &frogpilot_scene);
   void paintPedalIcons(QPainter &p, SubMaster &fpsm, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles);
+  void paintPendingSpeedLimit(QPainter &p, SubMaster &fpsm);
   void paintRadarTracks(QPainter &p, UIState &s, FrogPilotUIScene &frogpilot_scene, SubMaster &sm, SubMaster &fpsm);
   void paintRoadName(QPainter &p);
+  void paintSpeedLimitSources(QPainter &p, SubMaster &fpsm);
   void paintStandstillTimer(QPainter &p);
   void paintStoppingPoint(QPainter &p, UIScene &scene, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles);
   void paintTurnSignals(QPainter &p, SubMaster &fpsm);
@@ -83,11 +92,16 @@ private:
   QColor whiteColor(int alpha = 255) { return QColor(255, 255, 255, alpha); }
 
   QElapsedTimer glowTimer;
+  QElapsedTimer pendingLimitTimer;
   QElapsedTimer standstillTimer;
 
   QPixmap brakePedalImg;
   QPixmap curveSpeedIcon;
+  QPixmap dashboardIcon;
   QPixmap gasPedalImg;
+  QPixmap mapboxIcon;
+  QPixmap mapDataIcon;
+  QPixmap nextMapsIcon;
   QPixmap pausedIcon;
   QPixmap speedIcon;
   QPixmap stopSignImg;
