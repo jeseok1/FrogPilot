@@ -57,6 +57,8 @@ private:
   void paintCompass(QPainter &p, QJsonObject &frogpilot_toggles);
   void paintCurveSpeedControl(QPainter &p, SubMaster &fpsm);
   void paintCurveSpeedControlTraining(QPainter &p, SubMaster &fpsm);
+  void paintLateralPaused(QPainter &p, FrogPilotUIScene &frogpilot_scene);
+  void paintLongitudinalPaused(QPainter &p, FrogPilotUIScene &frogpilot_scene);
   void paintPedalIcons(QPainter &p, SubMaster &fpsm, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles);
   void paintRadarTracks(QPainter &p, UIState &s, FrogPilotUIScene &frogpilot_scene, SubMaster &sm, SubMaster &fpsm);
   void paintRoadName(QPainter &p);
@@ -82,11 +84,17 @@ private:
   QElapsedTimer glowTimer;
   QElapsedTimer standstillTimer;
 
+  QPixmap brakePedalImg;
   QPixmap curveSpeedIcon;
+  QPixmap gasPedalImg;
+  QPixmap pausedIcon;
+  QPixmap speedIcon;
   QPixmap stopSignImg;
+  QPixmap turnIcon;
 
   QPoint cemStatusPosition;
   QPoint compassPosition;
+  QPoint lateralPausedPosition;
 
   QSharedPointer<QMovie> cemCurveIcon;
   QSharedPointer<QMovie> cemLeadIcon;
