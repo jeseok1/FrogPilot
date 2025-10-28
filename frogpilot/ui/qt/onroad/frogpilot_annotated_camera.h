@@ -21,6 +21,7 @@ public:
 
   int alertHeight;
   int frogHopCount;
+  int standstillDuration;
 
   float distanceConversion;
   float setSpeed;
@@ -54,6 +55,7 @@ private:
   void paintPedalIcons(QPainter &p, SubMaster &fpsm, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles);
   void paintRadarTracks(QPainter &p, UIState &s, FrogPilotUIScene &frogpilot_scene, SubMaster &sm, SubMaster &fpsm);
   void paintRoadName(QPainter &p);
+  void paintStandstillTimer(QPainter &p);
   void paintStoppingPoint(QPainter &p, UIScene &scene, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles);
   void paintTurnSignals(QPainter &p, SubMaster &fpsm);
   void updateSignals();
@@ -73,6 +75,7 @@ private:
   QColor whiteColor(int alpha = 255) { return QColor(255, 255, 255, alpha); }
 
   QElapsedTimer glowTimer;
+  QElapsedTimer standstillTimer;
 
   QPixmap curveSpeedIcon;
   QPixmap stopSignImg;
