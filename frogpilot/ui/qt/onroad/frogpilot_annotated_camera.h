@@ -31,6 +31,7 @@ public:
   QColor blueColor(int alpha = 255) { return QColor(0, 0, 255, alpha); }
 
   QPoint dmIconPosition;
+  QPoint experimentalButtonPosition;
 
   QSize defaultSize;
 
@@ -48,6 +49,7 @@ private:
   void paintCompass(QPainter &p, QJsonObject &frogpilot_toggles);
   void paintCurveSpeedControl(QPainter &p, SubMaster &fpsm);
   void paintCurveSpeedControlTraining(QPainter &p, SubMaster &fpsm);
+  void paintPedalIcons(QPainter &p, SubMaster &fpsm, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles);
   void paintTurnSignals(QPainter &p, SubMaster &fpsm);
   void updateSignals();
 
