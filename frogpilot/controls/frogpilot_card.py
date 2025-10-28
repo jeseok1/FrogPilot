@@ -76,6 +76,8 @@ class FrogPilotCard:
     self.always_on_lateral_enabled &= sm["selfdriveState"].alertType != ET.IMMEDIATE_DISABLE or frogpilot_toggles.frogs_go_moo
     self.always_on_lateral_enabled &= not (carState.brakePressed and carState.vEgo < frogpilot_toggles.always_on_lateral_pause_speed or carState.standstill)
 
+    frogpilotCarState.distancePressed |= self.params_memory.get_bool("OnroadDistanceButtonPressed")
+
     if frogpilotCarState.distancePressed:
       self.gap_counter += 1
     elif not self.prev_distance_button:
