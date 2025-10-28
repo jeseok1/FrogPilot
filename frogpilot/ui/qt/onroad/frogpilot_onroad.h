@@ -14,4 +14,12 @@ public:
 
 private:
   void paintEvent(QPaintEvent *event);
+  void paintTurnSignalBorder(QPainter &p, const QRect &rect);
+
+  bool blindSpotLeft;
+  bool blindSpotRight;
+  bool flickerActive;
+  bool showBlindspot;
+
+  QTimer *signalTimer;
 };
