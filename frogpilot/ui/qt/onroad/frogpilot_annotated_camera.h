@@ -33,6 +33,8 @@ public:
   QPoint dmIconPosition;
   QPoint experimentalButtonPosition;
 
+  QPolygonF track_vertices;
+
   QSize defaultSize;
 
   QString accelerationUnit;
@@ -50,6 +52,7 @@ private:
   void paintCurveSpeedControl(QPainter &p, SubMaster &fpsm);
   void paintCurveSpeedControlTraining(QPainter &p, SubMaster &fpsm);
   void paintPedalIcons(QPainter &p, SubMaster &fpsm, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles);
+  void paintStoppingPoint(QPainter &p, UIScene &scene, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles);
   void paintTurnSignals(QPainter &p, SubMaster &fpsm);
   void updateSignals();
 
@@ -69,6 +72,7 @@ private:
   QElapsedTimer glowTimer;
 
   QPixmap curveSpeedIcon;
+  QPixmap stopSignImg;
 
   QPoint cemStatusPosition;
   QPoint compassPosition;

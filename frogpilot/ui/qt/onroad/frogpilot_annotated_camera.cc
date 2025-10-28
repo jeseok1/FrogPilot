@@ -4,6 +4,7 @@ FrogPilotAnnotatedCameraWidget::FrogPilotAnnotatedCameraWidget(QWidget *parent) 
   animationTimer = new QTimer(this);
 
   curveSpeedIcon = loadPixmap("../../frogpilot/assets/other_images/curve_speed.png", {btn_size, btn_size});
+  stopSignImg = loadPixmap("../../frogpilot/assets/other_images/stop_sign.png", {btn_size, btn_size});
 
   loadGif("../../frogpilot/assets/other_images/curve_icon.gif", cemCurveIcon, QSize(btn_size / 2, btn_size / 2), this);
   loadGif("../../frogpilot/assets/other_images/lead_icon.gif", cemLeadIcon, QSize(btn_size / 2, btn_size / 2), this);
@@ -177,6 +178,10 @@ void FrogPilotAnnotatedCameraWidget::paintFrogPilotWidgets(QPainter &p, UIState 
 
   if (frogpilot_toggles.value("pedals_on_ui").toBool()) {
     paintPedalIcons(p, fpsm, frogpilot_scene, frogpilot_toggles);
+  }
+
+  if (track_vertices.length() >= 1 && frogpilotPlan.getRedLight() && frogpilot_toggles.value("show_stopping_point").toBool()) {
+    paintStoppingPoint(p, scene, frogpilot_scene, frogpilot_toggles);
   }
 
   if ((carState.getLeftBlinker() || carState.getRightBlinker()) && signalStyle != "None") {
@@ -439,6 +444,26 @@ void FrogPilotAnnotatedCameraWidget::paintPedalIcons(QPainter &p, SubMaster &fps
 
   p.setOpacity(gasOpacity);
   p.drawPixmap(startX + btn_size / 2, startY, gasPedalImg);
+
+  p.restore();
+}
+
+void FrogPilotAnnotatedCameraWidget::paintStoppingPoint(QPainter &p, UIScene &scene, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles) {
+  p.save();
+
+  QPointF centerPoint = (track_vertices.first() + track_vertices.last()) / 2.0;
+  QPointF adjustedPoint = centerPoint - QPointF(stopSignImg.width() / 2, stopSignImg.height());
+  p.drawPixmap(adjustedPoint, stopSignImg);
+
+  if (frogpilot_toggles.value("show_stopping_point_metrics").toBool()) {
+    QFont font = InterFont(35, QFont::DemiBold);
+    QString text = QString::number(std::nearbyint(frogpilot_scene.model_length * distanceConversion)) + leadDistanceUnit;
+    QPointF textPosition = centerPoint - QPointF(QFontMetrics(font).horizontalAdvance(text) / 2, stopSignImg.height() + 35);
+
+    p.setFont(font);
+    p.setPen(QPen(whiteColor()));
+    p.drawText(textPosition, text);
+  }
 
   p.restore();
 }

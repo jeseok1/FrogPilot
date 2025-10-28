@@ -18,6 +18,7 @@ struct FrogPilotUIScene {
   bool use_stock_colors;
 
   int conditional_status;
+  int model_length;
   int started_timer;
 
   QColor lane_lines_color;
