@@ -712,6 +712,23 @@ void FrogPilotAnnotatedCameraWidget::paintRadarTracks(QPainter &p, UIState &s, F
   p.restore();
 }
 
+void FrogPilotAnnotatedCameraWidget::paintRainbowPath(QPainter &p, QLinearGradient &bg, float lin_grad_point, SubMaster &sm) {
+  p.save();
+
+  static float hueOffset = 0.0;
+  if (sm["carState"].getCarState().getVEgo() > 0) {
+    hueOffset += powf(sm["carState"].getCarState().getVEgo(), 0.5f) / sqrtf(145.0f / MS_TO_KPH);
+  }
+
+  float alpha = util::map_val(lin_grad_point, 0.0f, 1.0f, 0.5f, 0.1f);
+  float pathHue = fmodf((lin_grad_point * 360.0f) + hueOffset, 360.0f);
+
+  bg.setColorAt(lin_grad_point, QColor::fromHslF(pathHue / 360.0f, 1.0f, 0.5f, alpha));
+  bg.setSpread(QGradient::RepeatSpread);
+
+  p.restore();
+}
+
 void FrogPilotAnnotatedCameraWidget::paintRoadName(QPainter &p) {
   QString roadName = QString::fromStdString(params_memory.get("RoadName"));
   if (roadName.isEmpty()) {
