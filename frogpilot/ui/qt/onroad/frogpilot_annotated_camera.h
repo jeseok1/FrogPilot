@@ -75,6 +75,7 @@ private:
   void paintStandstillTimer(QPainter &p);
   void paintStoppingPoint(QPainter &p, UIScene &scene, FrogPilotUIScene &frogpilot_scene, QJsonObject &frogpilot_toggles);
   void paintTurnSignals(QPainter &p, SubMaster &fpsm);
+  void paintWeather(QPainter &p, SubMaster &fpsm, FrogPilotUIScene &frogpilot_scene);
   void updateSignals();
 
   int animationFrameIndex;
@@ -118,6 +119,10 @@ private:
   QSharedPointer<QMovie> cemTurnIcon;
   QSharedPointer<QMovie> chillModeIcon;
   QSharedPointer<QMovie> experimentalModeIcon;
+  QSharedPointer<QMovie> weatherClearDay;
+  QSharedPointer<QMovie> weatherClearNight;
+  QSharedPointer<QMovie> weatherRain;
+  QSharedPointer<QMovie> weatherSnow;
 
   QTimer *animationTimer;
 
