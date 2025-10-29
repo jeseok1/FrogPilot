@@ -755,26 +755,26 @@ void FrogPilotAnnotatedCameraWidget::paintPendingSpeedLimit(QPainter &p, SubMast
 }
 
 void FrogPilotAnnotatedCameraWidget::paintRadarTracks(QPainter &p, UIState &s, FrogPilotUIScene &frogpilot_scene, SubMaster &sm, SubMaster &fpsm) {
-  const cereal::ModelDataV2::Reader &model = sm["modelV2"].getModelV2();
-  const capnp::List<cereal::LiveTracks>::Reader &liveTracks = fpsm["liveTracks"].getLiveTracks();
+  //const cereal::ModelDataV2::Reader &model = sm["modelV2"].getModelV2();
+  //const capnp::List<cereal::LiveTracks>::Reader &liveTracks = fpsm["liveTracks"].getLiveTracks();
 
   p.save();
 
-  update_radar_tracks(liveTracks, model.getPosition(), s, sm);
+  //update_radar_tracks(liveTracks, model.getPosition(), s, sm);
 
-  int diameter = 25;
+  //int diameter = 25;
 
-  QRect viewport = p.viewport();
+  //QRect viewport = p.viewport();
 
-  for (std::size_t i = 0; i < frogpilot_scene.live_radar_tracks.size(); ++i) {
-    const RadarTrackData &track = frogpilot_scene.live_radar_tracks[i];
+  //for (std::size_t i = 0; i < frogpilot_scene.live_radar_tracks.size(); ++i) {
+    //const RadarTrackData &track = frogpilot_scene.live_radar_tracks[i];
 
-    float x = std::clamp(static_cast<float>(track.calibrated_point.x()), 0.0f, float(viewport.width() - diameter));
-    float y = std::clamp(static_cast<float>(track.calibrated_point.y()), 0.0f, float(viewport.height() - diameter));
+    //float x = std::clamp(static_cast<float>(track.calibrated_point.x()), 0.0f, float(viewport.width() - diameter));
+    //float y = std::clamp(static_cast<float>(track.calibrated_point.y()), 0.0f, float(viewport.height() - diameter));
 
-    p.setBrush(redColor());
-    p.drawEllipse(QPointF(x + diameter / 2.0f, y + diameter / 2.0f), diameter / 2.0f, diameter / 2.0f);
-  }
+    //p.setBrush(redColor());
+    //p.drawEllipse(QPointF(x + diameter / 2.0f, y + diameter / 2.0f), diameter / 2.0f, diameter / 2.0f);
+  //}
 
   p.restore();
 }
