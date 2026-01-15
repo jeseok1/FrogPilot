@@ -221,5 +221,8 @@ def send_stats(params, frogpilot_toggles):
   all_points = get_branch_commits(now) + model_points + [user_point]
 
   client = InfluxDBClient(org=ORG_ID, timeout=60000, token=TOKEN, url=STATS_URL)
-  client.write_api(write_options=SYNCHRONOUS).write(bucket=BUCKET, record=all_points)
-  print("Successfully sent FrogPilot stats!")
+  try:
+    client.write_api(write_options=SYNCHRONOUS).write(bucket=BUCKET, record=all_points)
+    print("Successfully sent FrogPilot stats!")
+  except Exception as error:
+    print(f"Failed to send stats: {error}")

@@ -136,7 +136,7 @@ elif TICI:
     "mkdir -p /data/ui_crashes; " +
     "fn=\"/data/ui_crashes/crash_$(date +%s).txt\"; " +
     "gdb -batch -ex 'run' -ex 'bt' ./ui > $fn 2>&1; " +
-    "python3 -c \"from openpilot.system.sentry import init, report_tombstone, SentryProject; init(SentryProject.SELFDRIVE); report_tombstone('$fn', 'UI Crash', open('$fn').read())\""
+    "python3 -c \"from openpilot.system.sentry import init, report_tombstone, SentryProject; init(SentryProject.SELFDRIVE); report_tombstone('$fn', 'UI Crash', open('$fn').read())\" &"
   ]
   procs.append(NativeProcess("ui", "selfdrive/ui", cmd, always_run, watchdog_max_dt=5))
 procs += [

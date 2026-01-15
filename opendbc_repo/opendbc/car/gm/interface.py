@@ -203,7 +203,6 @@ class CarInterface(CarInterfaceBase):
       if ret.enableGasInterceptorDEPRECATED:
         # ACC Bolts use pedal for full longitudinal control, not just sng
         ret.flags |= GMFlags.PEDAL_LONG.value
-        ret.longitudinalTuning.kf = 0.25
         ret.longitudinalTuning.kiBP = [0.0, 3., 6., 35.]
         ret.longitudinalTuning.kiV = [0.125, 0.175, 0.225, 0.33]
         ret.safetyConfigs[0].safetyParam |= GMSafetyFlags.FLAG_GM_PEDAL_LONG.value
@@ -260,7 +259,6 @@ class CarInterface(CarInterfaceBase):
       ret.longitudinalActuatorDelay = 1.  # TODO: measure this
       ret.longitudinalTuning.deadzoneBPDEPRECATED = [0.]
       ret.longitudinalTuning.deadzoneVDEPRECATED = [0.56]  # == 2 km/h/s, 1.25 mph/s
-      ret.longitudinalTuning.kf = 0.
       ret.longitudinalTuning.kiBP = [0.]
       ret.longitudinalTuning.kiV = [0.1]
       ret.longitudinalTuning.kpBP = [10.7, 10.8, 28.]  # 10.7 m/s == 24 mph
