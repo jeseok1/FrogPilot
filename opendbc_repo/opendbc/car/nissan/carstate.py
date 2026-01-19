@@ -130,7 +130,7 @@ class CarState(CarStateBase):
       self.lkas_hud_msg = copy.copy(cp_adas.vl["PROPILOT_HUD"])
       self.lkas_hud_info_msg = copy.copy(cp_adas.vl["PROPILOT_HUD_INFO_MSG"])
 
-    ret.buttonEvents = create_button_events(self.distance_button, prev_distance_button, {1: ButtonType.gapAdjustCruise})
+    buttonEvents = create_button_events(self.distance_button, prev_distance_button, {1: ButtonType.gapAdjustCruise})
 
     # FrogPilot variables
     fp_ret = custom.FrogPilotCarState.new_message()
@@ -138,9 +138,11 @@ class CarState(CarStateBase):
     self.prev_lkas_button = self.lkas_button
     self.lkas_button = ret.invalidLkasSetting
 
-    ret.buttonEvents = list(ret.buttonEvents) + [
+    buttonEvents += [
       *create_button_events(self.lkas_button, self.prev_lkas_button, {1: ButtonType.lkas, 0: ButtonType.lkas}),
     ]
+
+    ret.buttonEvents = buttonEvents
 
     return ret, fp_ret
 
