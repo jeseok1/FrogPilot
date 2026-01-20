@@ -52,7 +52,9 @@ void FrogPilotAnnotatedCameraWidget::showEvent(QShowEvent *event) {
 
 void FrogPilotAnnotatedCameraWidget::updateSignals() {
   QVector<QPixmap>().swap(blindspotImages);
+  QVector<QPixmap>().swap(blindspotImagesRight);
   QVector<QPixmap>().swap(signalImages);
+  QVector<QPixmap>().swap(signalImagesRight);
 
   bool isGif = false;
 
@@ -70,19 +72,26 @@ void FrogPilotAnnotatedCameraWidget::updateSignals() {
 
       int frameCount = movie.frameCount();
       signalImages.reserve(frameCount);
+      signalImagesRight.reserve(frameCount);
 
       for (int i = 0; i < frameCount; ++i) {
         movie.jumpToFrame(i);
 
-        QImage image = movie.currentPixmap().toImage().convertToFormat(QImage::Format_Indexed8);
-        QPixmap frame = QPixmap::fromImage(image);
+        QPixmap frame = movie.currentPixmap();
         signalImages.append(frame);
+        signalImagesRight.append(frame.transformed(QTransform().scale(-1, 1)));
       }
 
       movie.stop();
     } else if (fileName.endsWith(".png", Qt::CaseInsensitive)) {
-      QVector<QPixmap> &targetList = fileName.contains("blindspot", Qt::CaseInsensitive) ? blindspotImages : signalImages;
-      targetList.append(QPixmap::fromImage(QImage(filePath).convertToFormat(QImage::Format_Indexed8)));
+      QPixmap img(filePath);
+      if (fileName.contains("blindspot", Qt::CaseInsensitive)) {
+        blindspotImages.append(img);
+        blindspotImagesRight.append(img.transformed(QTransform().scale(-1, 1)));
+      } else {
+        signalImages.append(img);
+        signalImagesRight.append(img.transformed(QTransform().scale(-1, 1)));
+      }
     } else {
       QStringList parts = fileName.split('_');
       if (parts.size() == 2) {
@@ -1101,7 +1110,7 @@ void FrogPilotAnnotatedCameraWidget::paintStoppingPoint(QPainter &p) {
 }
 
 void FrogPilotAnnotatedCameraWidget::paintTurnSignals(QPainter &p) {
-  p.save();
+  int frameIndex = qBound(0, animationFrameIndex, totalFrames - 1);
 
   bool blindspotActive = blinkerLeft ? blindspotLeft : blindspotRight;
 
@@ -1113,23 +1122,20 @@ void FrogPilotAnnotatedCameraWidget::paintTurnSignals(QPainter &p) {
     signalYPosition = signalHeight / 2;
   } else {
     if (signalStyle == "traditional_gif") {
-      signalXPosition = blinkerLeft ? width() - (animationFrameIndex * signalMovement) + signalWidth : (animationFrameIndex * signalMovement) - signalWidth;
+      signalXPosition = blinkerLeft ? width() - (frameIndex * signalMovement) + signalWidth : (frameIndex * signalMovement) - signalWidth;
     } else {
-      signalXPosition = blinkerLeft ? width() - ((animationFrameIndex + 1) * signalWidth) : animationFrameIndex * signalWidth;
+      signalXPosition = blinkerLeft ? width() - ((frameIndex + 1) * signalWidth) : frameIndex * signalWidth;
     }
     signalYPosition = height() - signalHeight - alertHeight;
   }
 
-  QPixmap *imgToDraw = (blindspotActive && !blindspotImages.empty()) ? &blindspotImages[0] : &signalImages[animationFrameIndex];
   if (blinkerLeft) {
-    p.drawPixmap(signalXPosition, signalYPosition, signalWidth, signalHeight, *imgToDraw);
+    QPixmap &imgToDraw = (blindspotActive && !blindspotImages.empty()) ? blindspotImages[0] : signalImages[frameIndex];
+    p.drawPixmap(signalXPosition, signalYPosition, signalWidth, signalHeight, imgToDraw);
   } else {
-    p.translate(signalXPosition + signalWidth, signalYPosition);
-    p.scale(-1, 1);
-    p.drawPixmap(0, 0, signalWidth, signalHeight, *imgToDraw);
+    QPixmap &imgToDraw = (blindspotActive && !blindspotImagesRight.empty()) ? blindspotImagesRight[0] : signalImagesRight[frameIndex];
+    p.drawPixmap(signalXPosition, signalYPosition, signalWidth, signalHeight, imgToDraw);
   }
-
-  p.restore();
 }
 
 void FrogPilotAnnotatedCameraWidget::paintWeather(QPainter &p) {

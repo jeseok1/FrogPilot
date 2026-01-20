@@ -33,6 +33,22 @@ void clearMovie(QSharedPointer<QMovie> &movie, QWidget *parent) {
 }
 
 void loadGif(const QString &gifPath, QSharedPointer<QMovie> &movie, const QSize &size, QWidget *parent) {
+  if (!parent || gifPath.isEmpty()) {
+    return;
+  }
+
+  if (movie && movie->fileName() == gifPath && movie->state() == QMovie::Running) {
+    if (movie->scaledSize() != size) {
+      movie->setScaledSize(size);
+    }
+    return;
+  }
+
+  if (!QFileInfo::exists(gifPath)) {
+    clearMovie(movie, parent);
+    return;
+  }
+
   clearMovie(movie, parent);
 
   movie = QSharedPointer<QMovie>::create(gifPath);
@@ -50,13 +66,35 @@ void loadGif(const QString &gifPath, QSharedPointer<QMovie> &movie, const QSize 
 }
 
 void loadImage(const QString &basePath, QPixmap &pixmap, QSharedPointer<QMovie> &movie, const QSize &size, QWidget *parent) {
-  if (!parent) {
+  if (!parent || basePath.isEmpty()) {
     return;
   }
+
+  static QHash<QString, QPixmap> pixmapCache;
+  QString cacheKey = basePath + QString("_%1x%2").arg(size.width()).arg(size.height());
 
   QString gifPath = basePath + ".gif";
   if (QFileInfo::exists(gifPath)) {
     loadGif(gifPath, movie, size, parent);
+    if (!pixmap.isNull()) {
+      pixmap = QPixmap();
+    }
+    return;
+  }
+
+  clearMovie(movie, parent);
+
+  if (pixmapCache.contains(cacheKey)) {
+    QPixmap &cached = pixmapCache[cacheKey];
+    if (pixmap.cacheKey() != cached.cacheKey()) {
+      pixmap = cached;
+      parent->update();
+    }
+    return;
+  }
+
+  QString pngPath = basePath + ".png";
+  if (!QFileInfo::exists(pngPath)) {
     if (!pixmap.isNull()) {
       pixmap = QPixmap();
       parent->update();
@@ -64,13 +102,10 @@ void loadImage(const QString &basePath, QPixmap &pixmap, QSharedPointer<QMovie> 
     return;
   }
 
-  QString pngPath = basePath + ".png";
-
-  clearMovie(movie, parent);
-
   QPixmap loadedPixmap(pngPath);
   if (!loadedPixmap.isNull()) {
     pixmap = loadedPixmap.scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    pixmapCache.insert(cacheKey, pixmap);
   } else {
     pixmap = QPixmap();
   }

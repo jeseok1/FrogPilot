@@ -217,6 +217,10 @@ def load_json_file(path):
 def lock_doors(lock_doors_timer, sm, params):
   wait_for_no_driver(params, sm, door_checks=True, time_threshold=lock_doors_timer)
 
+  sm.update()
+  if any(ps.ignitionLine or ps.ignitionCan for ps in sm["pandaStates"] if ps.pandaType != log.PandaState.PandaType.unknown):
+    return
+
   can_parser = CANParser("toyota_nodsu_pt_generated", [("DOOR_LOCKS", 3)], bus=0)
   can_sock = messaging.sub_sock("can", timeout=100)
 

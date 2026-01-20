@@ -174,5 +174,7 @@ private:
   QTimer *animationTimer;
 
   QVector<QPixmap> blindspotImages;
+  QVector<QPixmap> blindspotImagesRight;
   QVector<QPixmap> signalImages;
+  QVector<QPixmap> signalImagesRight;
 };
