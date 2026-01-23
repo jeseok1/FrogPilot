@@ -333,16 +333,11 @@ class CarInterfaceBase(ABC):
 
     # FrogPilot variables
     prev_distance_button = self.distance_button
-    if self.params_memory.get_bool("OnroadDistanceButtonPressed"):
-      self.distance_button = True
+    self.distance_button = self.params_memory.get_bool("OnroadDistanceButtonPressed")
+    if self.distance_button != prev_distance_button:
       ret.buttonEvents = create_button_events(self.distance_button, prev_distance_button, {1: ButtonType.gapAdjustCruise})
-    elif prev_distance_button:
-      self.distance_button = False
-      ret.buttonEvents = create_button_events(self.distance_button, prev_distance_button, {1: ButtonType.gapAdjustCruise})
-    else:
-      self.distance_button = bool(self.CS.distance_button)
 
-    fp_ret.distancePressed = bool(self.distance_button)
+    fp_ret.distancePressed = self.distance_button or bool(self.CS.distance_button)
     fp_ret.ecoGear |= ret.gearShifter == GearShifter.eco
     fp_ret.sportGear |= ret.gearShifter == GearShifter.sport
 
