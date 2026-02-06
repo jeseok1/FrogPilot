@@ -1,0 +1,872 @@
+VERSION ""
+
+
+NS_ :
+  CM_
+  BA_DEF_
+  BA_
+  VAL_
+  BA_DEF_DEF_
+  SIG_VALTYPE_
+
+BS_:
+
+BU_: Vector__XXX
+
+
+BO_ 17 ErrorDriveController: 8 Vector__XXX
+SG_ DrvFusCommsError : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvFusionQuality2 : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvFusionQuality1 : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ HeadingError : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DistanceError : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvSteeringCommsError : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvSteering2CommsError : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvMotorCommsError : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ TrackValidationFailed : 8|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ObsValidationFailed : 9|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvObsCommsError : 10|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvObsStopCommsError : 11|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvUltraSoundCommsError : 12|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvUltraSoundMissingUnit : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Steering1Stopped : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Steering2Stopped : 15|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvMgtCommsError : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ V2xError : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvObsDangerZoneCommsError : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DeviationError : 19|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ LostJoystick : 20|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvEHBCommsError : 21|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvObsBufferingError : 22|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvGracefulStopped : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvSafetyCommsError : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvRollingTooFar : 25|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvSpeed2TorqueCommsError : 26|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvLocationJump : 27|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvDeltaSteerReqError : 28|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvOffTrack : 29|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ WPDistanceError : 30|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ TelportDenied : 31|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 18 ErrorFrontSteering: 8 Vector__XXX
+SG_ SteeringReqCommsError : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringReqSeqError : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringMotorBlocked : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringOverHeat : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringAngleSensorError : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringMotorPosSensorError : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringVoltOutOfRange : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ volt : 8|8@1+ (1,0) [0|255] "volt" Vector__XXX
+SG_ SteerReqCommsWarn : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteerReqSeqWarn : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteerMotorHighCurrentWarn : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteerHighTempWarn : 19|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved1 : 20|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ current : 24|8@1- (1,0) [-128|127] "A" Vector__XXX
+SG_ RPM : 32|16@1- (1,0) [-32768|32767] "rpm" Vector__XXX
+SG_ volt_old : 48|8@1+ (1,0) [0|255] "volt" Vector__XXX
+SG_ tempProtectionFactor : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 19 ErrorRearSteering: 8 Vector__XXX
+SG_ SteeringReqCommsError : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringReqSeqError : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringMotorBlocked : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringOverHeat : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringAngleSensorError : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringMotorPosSensorError : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteeringVoltOutOfRange : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ volt : 8|8@1+ (1,0) [0|255] "volt" Vector__XXX
+SG_ SteerReqCommsWarn : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteerReqSeqWarn : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteerMotorHighCurrentWarn : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SteerHighTempWarn : 19|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved1 : 20|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ current : 24|8@1- (1,0) [-128|127] "A" Vector__XXX
+SG_ RPM : 32|16@1- (1,0) [-32768|32767] "rpm" Vector__XXX
+SG_ volt_old : 48|8@1+ (1,0) [0|255] "volt" Vector__XXX
+SG_ tempProtectionFactor : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 23 ErrorObstaclePC: 8 Vector__XXX
+SG_ Obstacle_front_left_lidar_fault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_front_top_lidar_fault : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_front_right_lidar_fault : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_rear_left_lidar_fault : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_rear_top_lidar_fault : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_rear_right_lidar_fault : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_CAN_localisation_msg_er : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_transform_broadcaster_e : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_CAN_wheel_speed_msg_err : 8|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_CAN_front_steering_msg_ : 9|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_CAN_back_steering_msg_e : 10|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_ground_segmentation_msg : 11|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_map_msg_error : 12|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_path_planning_msg_error : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_collision_distance_msg_ : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_emergency_envelope_msg_ : 15|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_lidar_calibration_msg_e : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_multiple_lidar_fault : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_map_source_missing : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_map_multiple_missing : 19|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_dangerous_parameter : 20|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_Heartbeat_detection_err : 21|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_wp_mismatch : 22|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_track_mismatch : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Obstacle_drv_info_comms_error : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 24 ErrorLeftMotor: 8 Vector__XXX
+SG_ motorCommsError : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ motorTempError : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 27 ErrorEHBT060: 8 Vector__XXX
+SG_ T060RequestWarning : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060FollowLv1 : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060VibLv1 : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060_NTCLv1 : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060_NTCLv2 : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060PressureSensorFailed : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060OverTempWarning : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060LowPowerLv1 : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060HighPowerLv1 : 8|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060FollowLv2 : 9|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060VibLv2 : 10|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060CanBusOff : 11|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060OverCurrent : 12|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060CurrentSensorFailed : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060LowPowerLv2 : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060HighPowerLv2 : 15|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060PowerSwitchFailed : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060PowerDriverFailed : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ T060MotorPosFailed : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 19|5@1+ (1,0) [0|31] "" Vector__XXX
+SG_ T060Temp : 24|8@1+ (1,0) [0|255] "Degrees" Vector__XXX
+SG_ reserved1 : 32|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ softwareVersion : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ hardwareVersion : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 32 ObstacleEmergency: 8 Vector__XXX
+SG_ stop : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ minDistance : 8|8@1+ (1,0) [0|255] "m" Vector__XXX
+SG_ maxDistance : 16|8@1+ (1,0) [0|255] "m" Vector__XXX
+SG_ overtake : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ movingAway : 25|1@1+ (1,0) [0|1] "bool" Vector__XXX
+SG_ obsErrorStop : 26|1@1+ (1,0) [0|1] "bool" Vector__XXX
+SG_ reserved : 27|5@1+ (1,0) [0|31] "" Vector__XXX
+SG_ envelopDistance : 32|8@1+ (1,0) [0|255] "m" Vector__XXX
+
+BO_ 34 ErrorSafetyBoard: 8 Vector__XXX
+SG_ SafetyLineActivated : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SafetyRelayK2Failed : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SafetyRelayK5Failed : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ SafetyRelayK3Failed : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ PowerSupplyV4Low : 4|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 35 StartupErrorMsg: 8 Vector__XXX
+SG_ startupVersionError : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ bmsStatus : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ bmsErrLevel : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ bmsPosRelayOpen : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ startupSafetyRelayOpen : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ startupDriveInfoComms : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ lotteBmsErr : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 36 ErrorDriveExt: 8 Vector__XXX
+SG_ DrvextObsValidationCommsError : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvextMotorNoResp : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvextSafetyRelayOpen : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvextParameterOutOfRange : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvextMotorOverTemp : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvextSpeedDeviationError : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 43 ManagementError: 8 Vector__XXX
+SG_ monitorError : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ mgtStatusError : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ mgtDrvInfoCommsError : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ sharedDriveError : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ GPSOff : 8|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ reserved1 : 10|6@1+ (1,0) [0|63] "" Vector__XXX
+SG_ drvGPSOff : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ ignoreDZ : 18|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ mcuVersionsOk : 20|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ recording : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ limpMode : 24|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 49 DriveWarningMsg: 8 Vector__XXX
+SG_ DrvTrafficCommsError : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvV2xWarn : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvMgtCommsWarn : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvMotorOff : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvNetCommsError : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvNoSteer1Type : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvNoSteer2Type : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ DrvMcuVerIncompatible : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 56 Timepulse_front: 8 Vector__XXX
+SG_ localTime : 0|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+SG_ sync : 32|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 57 Timepulse_rear: 5 Vector__XXX
+SG_ localTime : 0|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+SG_ sync : 32|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 64 ResetReqMsg: 8 Vector__XXX
+SG_ reset : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ shutdown : 16|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ parameter : 32|16@1+ (1,0) [0|65535] "" Vector__XXX
+
+BO_ 84 ResetManual: 8 Vector__XXX
+SG_ cause : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+
+BO_ 106 ResetSecurity: 5 Vector__XXX
+SG_ cause : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+
+BO_ 290 ObstacleDangerZoneMsg: 8 Vector__XXX
+SG_ distance : 0|13@1+ (1,0) [0|8191] "mm" Vector__XXX
+SG_ timeToCollision : 13|8@1+ (1,0) [0|255] "sec" Vector__XXX
+SG_ notMoving : 21|1@1+ (1,0) [0|1] "bool" Vector__XXX
+SG_ movingSideways : 22|1@1+ (1,0) [0|1] "bool" Vector__XXX
+SG_ reserved : 23|17@1+ (1,0) [0|131071] "" Vector__XXX
+SG_ timeStamp : 40|24@1+ (1,0) [0|16777215] "" Vector__XXX
+
+BO_ 291 ObstacleTrackDistanceMsg: 8 Vector__XXX
+SG_ trackDistance : 0|13@1+ (1,0) [0|8191] "mm" Vector__XXX
+SG_ sideDistanceA : 13|13@1+ (1,0) [0|8191] "mm" Vector__XXX
+SG_ sideDistanceB : 26|13@1+ (1,0) [0|8191] "mm" Vector__XXX
+SG_ moveAwayFlag : 39|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ incSpeedFlag : 40|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ignoredObstacle : 41|1@1+ (1,0) [0|1] "bool" Vector__XXX
+SG_ ClearOnRight : 42|1@1+ (1,0) [0|1] "bool" Vector__XXX
+SG_ ClearOnLeft : 43|1@1+ (1,0) [0|1] "bool" Vector__XXX
+
+BO_ 292 ObstacleDangerZoneStopMsg: 8 Vector__XXX
+SG_ distance : 0|13@1+ (1,0) [0|8191] "mm" Vector__XXX
+SG_ timeToCollision : 13|8@1+ (1,0) [0|255] "sec" Vector__XXX
+SG_ notMoving : 21|1@1+ (1,0) [0|1] "bool" Vector__XXX
+SG_ movingSideways : 22|1@1+ (1,0) [0|1] "bool" Vector__XXX
+SG_ occluded : 23|1@1+ (1,0) [0|1] "bool" Vector__XXX
+SG_ tolerance : 24|8@1+ (1,0) [0|255] "mm" Vector__XXX
+
+BO_ 304 TrafficLightMsg: 8 Vector__XXX
+SG_ status : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ timeToChange : 8|16@1+ (1,0) [0|65535] "0.1sec" Vector__XXX
+SG_ lightID : 24|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ stopNow : 40|1@1+ (1,0) [0|1] "bool" Vector__XXX
+
+BO_ 336 EHBReqMsg: 8 Vector__XXX
+SG_ enable : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ parkActive : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ slope : 8|8@1+ (1,0) [0|255] "degree" Vector__XXX
+SG_ pressure : 32|8@1+ (1,0) [0|255] "bar" Vector__XXX
+SG_ counter : 48|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ checksum : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 353 Motor3ReqMsg: 8 Vector__XXX
+SG_ controlModel : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ direction : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ mode : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ speed : 8|16@1- (1,0) [-32768|32767] "RPM" Vector__XXX
+SG_ torque : 24|16@1+ (1,0) [0|65535] "Nm" Vector__XXX
+SG_ throttleOpenDegree : 40|8@1+ (1,0) [0|255] "%" Vector__XXX
+SG_ count : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 355 frontSteeringReq: 8 Vector__XXX
+SG_ angle : 0|16@1- (0.01,0) [-327.68|327.67] "degree" Vector__XXX
+SG_ speed : 16|8@1+ (0.1,0) [0|25.5] "deg/s" Vector__XXX
+SG_ counter : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ mode : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 33|7@1+ (1,0) [0|127] "" Vector__XXX
+SG_ time : 40|24@1+ (1,0) [0|16777215] "ms" Vector__XXX
+
+BO_ 356 rearSteeringReq: 8 Vector__XXX
+SG_ angle : 0|16@1- (0.01,0) [-327.68|327.67] "degree" Vector__XXX
+SG_ speed : 16|8@1+ (0.1,0) [0|25.5] "deg/s" Vector__XXX
+SG_ counter : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ mode : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 33|7@1+ (1,0) [0|127] "" Vector__XXX
+SG_ time : 40|24@1+ (1,0) [0|16777215] "ms" Vector__XXX
+
+BO_ 384 ManualDriveMsg: 8 Vector__XXX
+SG_ frontSteerAngle : 0|16@1- (1,0) [-32768|32767] "degree" Vector__XXX
+SG_ slide : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ pressure : 24|8@1+ (1,0) [0|255] "bar" Vector__XXX
+SG_ start : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reverse : 33|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 34|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ brake : 36|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ EPB : 37|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved1 : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ rearSteerAngle : 40|16@1- (1,0) [-32768|32767] "degree" Vector__XXX
+SG_ id : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 385 JoystickMsg: 8 Vector__XXX
+SG_ x : 0|10@1+ (1,0) [0|1023] "" Vector__XXX
+SG_ y : 10|10@1+ (1,0) [0|1023] "" Vector__XXX
+SG_ hatswitch : 20|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ rotation : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ throttle : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ b1 : 40|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ b2 : 41|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ b3 : 42|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ b4 : 43|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ b5 : 44|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ b6 : 45|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ b7 : 46|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ b8 : 47|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ b9 : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ b10 : 49|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ b11 : 50|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ b12 : 51|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 52|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ id : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 389 LocManualMsg: 8 Vector__XXX
+SG_ frontSteerAngle : 0|16@1- (1,0) [-32768|32767] "degree" Vector__XXX
+SG_ slide : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ pressure : 24|8@1+ (1,0) [0|255] "bar" Vector__XXX
+SG_ start : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reverse : 33|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 34|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ brake : 36|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ EPB : 37|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved1 : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ rearSteerAngle : 40|16@1- (1,0) [-32768|32767] "degree" Vector__XXX
+SG_ id : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 513 DriveRequestsMsg: 8 Vector__XXX
+SG_ driveGPSOff : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ mgtGPSOff : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ lidarLocOff : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ fusionReset : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 535 LidarLatitudeUndelayed: 8 Vector__XXX
+SG_ Latitude : 0|36@1- (1E-008,0) [-343.59738368|343.59738367] "degrees" Vector__XXX
+SG_ CompassHeading : 36|16@1+ (1,0) [0|65535] "degrees" Vector__XXX
+SG_ Available : 52|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 53|9@1+ (1,0) [0|511] "" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 536 LidarLongitudeUndelayed: 8 Vector__XXX
+SG_ Longitude : 0|36@1- (1E-008,0) [-343.59738368|343.59738367] "degrees" Vector__XXX
+SG_ StepsBack : 36|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ reserved : 40|22@1+ (1,0) [0|4194303] "" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 537 FusionFrontLatitude: 8 Vector__XXX
+SG_ latitude : 0|36@1- (1E-008,0) [-343.59738368|343.59738367] "degrees" Vector__XXX
+SG_ longAcc : 36|8@1- (1,0) [-128|127] "m/s2" Vector__XXX
+SG_ pitch : 44|8@1- (0.1,0) [-12.8|12.7] "degrees" Vector__XXX
+SG_ observedAntennaOffset : 52|10@1+ (1,0) [0|1023] "mm" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 538 FusionFrontLongitude: 8 Vector__XXX
+SG_ longitude : 0|36@1- (1E-008,0) [-343.59738368|343.59738367] "degrees" Vector__XXX
+SG_ forwardConf : 36|14@1+ (1,0) [0|16383] "m" Vector__XXX
+SG_ heading : 50|12@1+ (0.1,0) [0|409.5] "degree" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 539 FusionRearLatitude: 8 Vector__XXX
+SG_ latitude : 0|36@1- (1E-008,0) [-343.59738368|343.59738367] "degrees" Vector__XXX
+SG_ lateralConf : 36|14@1+ (1,0) [0|16383] "m" Vector__XXX
+SG_ latAcc : 50|8@1- (1,0) [-128|127] "m/s2" Vector__XXX
+SG_ unused : 58|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 540 FusionRearLongitude: 8 Vector__XXX
+SG_ longitude : 0|36@1- (1E-008,0) [-343.59738368|343.59738367] "degrees" Vector__XXX
+SG_ headConf : 36|14@1+ (1,0) [0|16383] "degrees" Vector__XXX
+SG_ savedAntennaOffset : 50|10@1+ (1,0) [0|1023] "mm" Vector__XXX
+SG_ fusionInitialisable : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 61|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 541 FusionHeight: 8 Vector__XXX
+SG_ height : 0|23@1- (0.0001,0) [-419.4304|419.4303] "m" Vector__XXX
+SG_ speed : 23|12@1- (0.01,0) [-20.48|20.47] "m/s" Vector__XXX
+SG_ sync : 35|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ delay_gnss_front : 37|10@1+ (1,0) [0|1023] "" Vector__XXX
+SG_ delay_gnss_rear : 47|10@1+ (1,0) [0|1023] "" Vector__XXX
+
+BO_ 549 frontGpsUbxPart1: 8 Vector__XXX
+SG_ Latitude : 0|36@1- (1,0) [-34359738368|34359738367] "degrees" Vector__XXX
+SG_ Height : 36|23@1- (1,0) [-4194304|4194303] "metres" Vector__XXX
+SG_ reserved : 59|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Valid_Checksum : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Data_Available : 61|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 550 frontGpsUbxPart2: 8 Vector__XXX
+SG_ Longitude : 0|36@1- (1,0) [-34359738368|34359738367] "degrees" Vector__XXX
+SG_ HorizontalAccuracy : 36|10@1+ (1,0) [0|1023] "metres" Vector__XXX
+SG_ VerticalAccuracy : 46|10@1+ (1,0) [0|1023] "metres" Vector__XXX
+SG_ CarrierSolution : 56|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ pvtValidChecksum : 58|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 59|3@1+ (1,0) [0|7] "" Vector__XXX
+SG_ Sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 551 frontGpsUbxPart3: 8 Vector__XXX
+SG_ iTow : 0|32@1+ (1,0) [0|4294967295] "ms" Vector__XXX
+SG_ localTime : 32|32@1+ (1,0) [0|4294967295] "ms" Vector__XXX
+
+BO_ 565 rearGpsUbxPart1: 8 Vector__XXX
+SG_ Latitude : 0|36@1- (1,0) [-34359738368|34359738367] "degrees" Vector__XXX
+SG_ Height : 36|23@1- (1,0) [-4194304|4194303] "metres" Vector__XXX
+SG_ reserved : 59|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Valid_Checksum : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Data_Available : 61|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 566 rearGpsUbxPart2: 8 Vector__XXX
+SG_ Longitude : 0|36@1- (1,0) [-34359738368|34359738367] "degrees" Vector__XXX
+SG_ HorizontalAccuracy : 36|10@1+ (1,0) [0|1023] "metres" Vector__XXX
+SG_ VerticalAccuracy : 46|10@1+ (1,0) [0|1023] "metres" Vector__XXX
+SG_ CarrierSolution : 56|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ pvtValidChecksum : 58|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 59|3@1+ (1,0) [0|7] "" Vector__XXX
+SG_ Sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 567 rearGpsUbxPart3: 8 Vector__XXX
+SG_ iTow : 0|32@1+ (1,0) [0|4294967295] "ms" Vector__XXX
+SG_ localTime : 32|32@1+ (1,0) [0|4294967295] "ms" Vector__XXX
+
+BO_ 577 LidarLatitude: 8 Vector__XXX
+SG_ Latitude : 0|36@1- (1,0) [-34359738368|34359738367] "degrees" Vector__XXX
+SG_ ForwardStdDev : 36|8@1+ (1,0) [0|255] "meters" Vector__XXX
+SG_ LatUnavailable : 44|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ForwardInfStdDev : 45|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Delay : 46|8@1+ (1,0) [0|255] "mSec" Vector__XXX
+SG_ Reserved : 54|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 578 LidarLongitude: 8 Vector__XXX
+SG_ Longitude : 0|36@1- (1,0) [-34359738368|34359738367] "degrees" Vector__XXX
+SG_ LateralStdDev : 36|8@1+ (1,0) [0|255] "meters" Vector__XXX
+SG_ LongUnavailable : 44|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ LateralInfStdDev : 45|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Reserved : 46|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 579 LidarHeading: 8 Vector__XXX
+SG_ CompassHeading : 0|16@1+ (1,0) [0|65535] "degrees" Vector__XXX
+SG_ HeadingStdDev : 16|8@1+ (1,0) [0|255] "degrees" Vector__XXX
+SG_ MeanSquaredError : 24|8@1+ (1,0) [0|255] "metres" Vector__XXX
+SG_ HeadingUnavailable : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ HeadingInfStdDev : 33|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 34|6@1+ (1,0) [0|63] "" Vector__XXX
+SG_ timeStamp : 40|16@1+ (1,0) [0|65535] "ms" Vector__XXX
+SG_ reserved1 : 56|3@1+ (1,0) [0|7] "" Vector__XXX
+SG_ msgVersion : 59|3@1+ (1,0) [0|7] "" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 581 CameraLatitude: 8 Vector__XXX
+SG_ Latitude : 0|36@1- (1,0) [-34359738368|34359738367] "degrees" Vector__XXX
+SG_ ForwardStdDev : 36|8@1+ (1,0) [0|255] "meters" Vector__XXX
+SG_ LatUnavailable : 44|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ ForwardInfStdDev : 45|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Delay : 46|8@1+ (1,0) [0|255] "mSec" Vector__XXX
+SG_ Reserved : 54|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 582 CameraLongitude: 8 Vector__XXX
+SG_ Longitude : 0|36@1- (1,0) [-34359738368|34359738367] "degrees" Vector__XXX
+SG_ LateralStdDev : 36|8@1+ (1,0) [0|255] "meters" Vector__XXX
+SG_ LongUnavailable : 44|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ LateralInfStdDev : 45|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Reserved : 46|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 583 CameraHeading: 8 Vector__XXX
+SG_ CompassHeading : 0|16@1+ (1,0) [0|65535] "degrees" Vector__XXX
+SG_ HeadingStdDev : 16|8@1+ (1,0) [0|255] "degrees" Vector__XXX
+SG_ MeanSquaredError : 24|8@1+ (1,0) [0|255] "metres" Vector__XXX
+SG_ HeadingUnavailable : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ HeadingInfStdDev : 33|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 34|6@1+ (1,0) [0|63] "" Vector__XXX
+SG_ timeStamp : 40|16@1+ (1,0) [0|65535] "ms" Vector__XXX
+SG_ reserved1 : 56|3@1+ (1,0) [0|7] "" Vector__XXX
+SG_ msgVersion : 59|3@1+ (1,0) [0|7] "" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 640 frontSteeringStatus: 8 Vector__XXX
+SG_ angle : 0|16@1- (0.01,0) [-327.68|327.67] "degree" Vector__XXX
+SG_ status : 16|3@1+ (1,0) [0|7] "" Vector__XXX
+SG_ calibrationSet : 19|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ sensorFailed : 21|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ factorSet : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ count : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ temperature : 32|8@1- (1,0) [-128|127] "degree F" Vector__XXX
+SG_ time : 40|24@1+ (1,0) [0|16777215] "" Vector__XXX
+
+BO_ 641 rearSteeringStatus: 8 Vector__XXX
+SG_ angle : 0|16@1- (0.01,0) [-327.68|327.67] "degree" Vector__XXX
+SG_ status : 16|3@1+ (1,0) [0|7] "" Vector__XXX
+SG_ calibrationSet : 19|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ sensorFailed : 21|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ factorSet : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ count : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ temperature : 32|8@1- (1,0) [-128|127] "degree F" Vector__XXX
+SG_ time : 40|24@1+ (1,0) [0|16777215] "" Vector__XXX
+
+BO_ 661 Motor3Status1: 8 Vector__XXX
+SG_ controlModel : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ direction : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ mode : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ currentTorque : 8|15@1+ (1,0) [0|32767] "Nm" Vector__XXX
+SG_ torqueDir : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ currentSpeed : 24|16@1- (1,0) [-32768|32767] "RPM" Vector__XXX
+SG_ motorTemp : 40|8@1+ (1,0) [0|255] "degrees F" Vector__XXX
+SG_ contTemp : 48|8@1+ (1,0) [0|255] "degrees F" Vector__XXX
+SG_ errorCode : 56|6@1+ (1,0) [0|63] "" Vector__XXX
+SG_ faultLevel : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 662 Motor3Status2: 8 Vector__XXX
+SG_ current : 0|16@1+ (1,0) [0|65535] "A" Vector__XXX
+SG_ voltage : 16|16@1+ (1,0) [0|65535] "V" Vector__XXX
+SG_ actualTorque : 32|16@1+ (1,0) [0|65535] "Nm" Vector__XXX
+SG_ count : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ reserved : 56|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ dampEnable : 60|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ lameStatus : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 688 EPBReqMsg: 8 Vector__XXX
+SG_ request : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 693 EPB1Status: 7 Vector__XXX
+SG_ status : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ mode : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ error : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ current : 24|16@1+ (1,0) [0|65535] "A" Vector__XXX
+SG_ vin1 : 40|8@1+ (1,0) [0|255] "V" Vector__XXX
+SG_ vin2 : 48|8@1+ (1,0) [0|255] "V" Vector__XXX
+
+BO_ 694 EPB2Status: 7 Vector__XXX
+SG_ status : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ mode : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ error : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ current : 24|16@1+ (1,0) [0|65535] "A" Vector__XXX
+SG_ vin1 : 40|8@1+ (1,0) [0|255] "V" Vector__XXX
+SG_ vin2 : 48|8@1+ (1,0) [0|255] "V" Vector__XXX
+
+BO_ 784 ParameterConfMsg: 8 Vector__XXX
+SG_ id : 0|15@1+ (1,0) [0|32767] "" Vector__XXX
+SG_ read : 15|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ value : 16|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+SG_ writeAll : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ writeLast : 49|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 785 ConfigResp: 8 Vector__XXX
+SG_ id : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ value : 16|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+
+BO_ 786 VersionReqMsg: 8 Vector__XXX
+SG_ id : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+
+BO_ 787 VersionRespMsg: 8 Vector__XXX
+SG_ id : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ major : 16|7@1+ (1,0) [0|127] "" Vector__XXX
+SG_ debug : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ minor : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ build : 32|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+
+BO_ 788 BootloaderVersionRespMsg: 8 Vector__XXX
+SG_ id : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ major : 16|7@1+ (1,0) [0|127] "" Vector__XXX
+SG_ debug : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ minor : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ build : 32|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+
+BO_ 789 OcanDBCVersionMsg: 8 Vector__XXX
+SG_ id : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ major : 16|7@1+ (1,0) [0|127] "" Vector__XXX
+SG_ debug : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ minor : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ build : 32|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+
+BO_ 790 PcanDBCVersionMsg: 8 Vector__XXX
+SG_ id : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ major : 16|7@1+ (1,0) [0|127] "" Vector__XXX
+SG_ debug : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ minor : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ build : 32|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+
+BO_ 792 ConfigSignResp: 8 Vector__XXX
+SG_ id : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ value : 16|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+
+BO_ 800 SystemReqMsg: 8 Vector__XXX
+SG_ mode : 0|6@1+ (1,0) [0|63] "" Vector__XXX
+SG_ reserved : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ path : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ maxSpeed : 16|16@1+ (1,0) [0|65535] "m/s" Vector__XXX
+SG_ reserved1 : 32|28@1+ (1,0) [0|268435455] "" Vector__XXX
+SG_ driveDisalowed : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ errorCheck : 61|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ useLidar : 62|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ useUltrasound : 63|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 802 StartupStatusMsg: 5 Vector__XXX
+SG_ bms : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ emergencyLevel : 1|3@1+ (1,0) [0|7] "" Vector__XXX
+SG_ safetyLineErr : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 5|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ motorRly : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ status : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ key1 : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ key2 : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 804 SecuritySpeedMsg: 8 Vector__XXX
+SG_ maxSpeed : 0|16@1+ (1,0) [0|65535] "mm/s" Vector__XXX
+
+BO_ 808 DriveInfo500kWpMsg: 8 Vector__XXX
+SG_ waypoint : 0|19@1+ (1,0) [0|524287] "" Vector__XXX
+SG_ reserved : 19|5@1+ (1,0) [0|31] "" Vector__XXX
+SG_ maxSpeed : 24|8@1+ (1,0) [0|255] "mm/s" Vector__XXX
+SG_ errorDistance : 32|16@1- (1,0) [-32768|32767] "m" Vector__XXX
+SG_ mode : 48|6@1+ (1,0) [0|63] "" Vector__XXX
+SG_ brake : 54|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reverse : 55|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ path : 56|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ leftDrive : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ errorCheck : 61|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ useLidar : 62|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 816 EHBStatusMsg: 8 Vector__XXX
+SG_ pressure : 8|8@1+ (1,0) [0|255] "bar" Vector__XXX
+SG_ aimPressure : 40|8@1+ (1,0) [0|255] "bar" Vector__XXX
+
+BO_ 818 EHBT060PowerMsg: 8 Vector__XXX
+SG_ reserved : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ voltage : 8|8@1+ (1,0) [0|255] "V" Vector__XXX
+SG_ s16_ADC : 16|6@1+ (1,0) [0|63] "" Vector__XXX
+SG_ reserved1 : 22|6@1+ (1,0) [0|63] "" Vector__XXX
+SG_ s16_ADCEx : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ cylinderPosition : 32|4@1+ (1,0) [0|15] "mm" Vector__XXX
+SG_ reserved2 : 36|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ cylinderPositionEx : 40|8@1+ (1,0) [0|255] "mm" Vector__XXX
+SG_ counter : 48|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ reserved3 : 52|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ checksum : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1024 BatteryStatusMsg: 8 Vector__XXX
+SG_ main : 0|16@1+ (1,0) [0|65535] "V" Vector__XXX
+SG_ controller : 16|8@1+ (1,0) [0|255] "V" Vector__XXX
+SG_ frontSteering : 24|8@1+ (1,0) [0|255] "V" Vector__XXX
+SG_ rearSteering : 32|8@1+ (1,0) [0|255] "V" Vector__XXX
+SG_ door : 40|8@1+ (1,0) [0|255] "V" Vector__XXX
+
+BO_ 1328 FrontRightIndicatorLightReqMsg: 8 Vector__XXX
+SG_ on : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1329 FrontRightIndicatorLightStatusMs: 8 Vector__XXX
+SG_ on : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1344 FrontLeftIndicatorLightReqMsg: 8 Vector__XXX
+SG_ on : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1345 FrontLeftIndicatorLightStatusMsg: 8 Vector__XXX
+SG_ on : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1360 RearBrakeLightReqMsg: 8 Vector__XXX
+SG_ on : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1361 RearBrakeLightStatusMsg: 8 Vector__XXX
+SG_ on : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1376 RearRightIndicatorLightReqMsg: 8 Vector__XXX
+SG_ on : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1377 RearRightIndicatorLightStatusMsg: 8 Vector__XXX
+SG_ on : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1392 RearLeftIndicatorLightReqMsg: 8 Vector__XXX
+SG_ on : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1393 RearLeftIndicatorLightStatusMsg: 8 Vector__XXX
+SG_ on : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1408 Motor3Status3: 8 Vector__XXX
+SG_ HWVersionMinorL : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ HWVersionMinorH : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ HWVersionMajor : 8|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ reserved : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ SWVersionMinorL : 16|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ SWVersionMinorH : 20|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ SWVersionMajor : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ vehicleInfo : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ SWReleaseYear : 32|7@1+ (1,0) [0|127] "" Vector__XXX
+SG_ SWReleaseDate : 39|5@1+ (1,0) [0|31] "" Vector__XXX
+SG_ SWReleaseMonth : 44|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ energyDeviceAddr : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ programCode : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1409 Motor3Status4: 8 Vector__XXX
+SG_ productionUniqueNo : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ factoryNo : 16|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ manufactureYear : 32|7@1+ (1,0) [0|127] "" Vector__XXX
+SG_ manufactureDate : 39|5@1+ (1,0) [0|31] "" Vector__XXX
+SG_ manufactureMonth : 44|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ deviceAddr : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1410 Motor3Status5: 8 Vector__XXX
+SG_ initAngleBeforeAdjust : 0|12@1+ (1,0) [0|4095] "degrees" Vector__XXX
+SG_ AdjustResult : 12|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ reserved : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ initAngleaAfterAdjust : 16|12@1+ (1,0) [0|4095] "degrees" Vector__XXX
+
+BO_ 1411 Motor3Status6: 8 Vector__XXX
+SG_ forwardCumulativeCharge : 0|20@1+ (1,0) [0|1048575] "kWH" Vector__XXX
+SG_ reverseCumulativeCharge : 20|20@1+ (1,0) [0|1048575] "kWH" Vector__XXX
+SG_ positiveCumulativePower : 40|12@1+ (1,0) [0|4095] "kWH" Vector__XXX
+SG_ reverseCumulativePower : 52|12@1+ (1,0) [0|4095] "kWH" Vector__XXX
+
+BO_ 1412 BMSStatusStdMsg: 8 Vector__XXX
+SG_ maxDischargeCurrent : 0|16@1+ (1,0) [0|65535] "A" Vector__XXX
+SG_ maxChargeCurrent : 16|16@1+ (1,0) [0|65535] "A" Vector__XXX
+SG_ soc : 32|8@1+ (1,0) [0|255] "%" Vector__XXX
+SG_ maxBattVolt : 40|8@1+ (1,0) [0|255] "V" Vector__XXX
+SG_ count : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ reserved : 56|6@1+ (1,0) [0|63] "" Vector__XXX
+SG_ errorLevel : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1536 ErrorReportMsg: 6 Vector__XXX
+SG_ id : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ type : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ error : 16|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+
+BO_ 1546 SecurityWarningMsg: 8 Vector__XXX
+SG_ collisionCommsDelay : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ collisionCommsMissing : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1569 IMURot: 8 Vector__XXX
+SG_ pitch : 0|16@1- (1,0) [-32768|32767] "degrees" Vector__XXX
+SG_ roll : 16|16@1- (1,0) [-32768|32767] "degrees" Vector__XXX
+SG_ heading : 32|16@1+ (1,0) [0|65535] "degrees" Vector__XXX
+SG_ accuracy : 48|12@1+ (1,0) [0|4095] "radians" Vector__XXX
+SG_ status : 60|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ sync : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1572 IMUStatus: 8 Vector__XXX
+SG_ status : 0|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+SG_ warnings : 32|16@1+ (1,0) [0|65535] "" Vector__XXX
+SG_ heading : 48|12@1+ (1,0) [0|4095] "degrees" Vector__XXX
+SG_ heading_available : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1792 OdometerMsg: 8 Vector__XXX
+SG_ value : 0|32@1+ (1,0) [0|4294967295] "km" Vector__XXX
+
+BO_ 1793 OdometryParameters: 8 Vector__XXX
+SG_ FrontOffset : 0|8@1- (1,0) [-128|127] "degrees" Vector__XXX
+SG_ FrontScale : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ RearOffset : 16|8@1- (1,0) [-128|127] "degrees" Vector__XXX
+SG_ RearScale : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ WheelSpeedScale : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ startupCount : 40|14@1+ (1,0) [0|16383] "" Vector__XXX
+SG_ adaptiveCount : 54|10@1+ (1,0) [0|1023] "" Vector__XXX
+
+BO_ 1811 StopDebugMsg: 8 Vector__XXX
+SG_ ClosestStop : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ reserved : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ trafficEventState : 8|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ junctionManualEventState : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+SG_ closestDistance2Stop : 16|16@1+ (1,0) [0|65535] "mm" Vector__XXX
+SG_ trafficDistance2Stop : 32|16@1+ (1,0) [0|65535] "mm" Vector__XXX
+SG_ junctionManualDistance2Stop : 48|16@1+ (1,0) [0|65535] "mm" Vector__XXX
+
+BO_ 1824 DebugMsg: 8 Vector__XXX
+SG_ ultrasoundDistance : 0|16@1+ (1,0) [0|65535] "mm" Vector__XXX
+SG_ lidarDistance : 16|16@1+ (1,0) [0|65535] "mm" Vector__XXX
+
+BO_ 1828 FusionFlagsMsg: 8 Vector__XXX
+SG_ fus_internal_reset : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ init_failed : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ front_steer_invalid : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ rear_steer_invalid : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ speed_invalid : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ time_step_size_invalid : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ lidar_slam_stddev_nonpositive : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ cam_slam_stddev_nonpositive : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ motor_comms : 8|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ front_steer_comms : 9|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ rear_steer_comms : 10|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ veh_cholesky_failed : 11|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ veh_innovation_cov_not_psd : 12|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ veh_nonpositive_variance : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ veh_nan_or_inf : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ odo_cholesky_failed : 15|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ odo_innovation_cov_not_psd : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ odo_nonpositive_variance : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ odo_nan_or_inf : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ drv_req_comms : 19|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ front_wheel_speed_comms : 20|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ rear_wheel_speed_comms : 21|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ conflicting_inputs : 22|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ saved_antenna_offset_missing : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ huge_sensor_update : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ safety_relay_open : 25|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ drv_info_comms_error : 26|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ w_front_gnss_no_data_ubx : 27|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ w_rear_gnss_no_data : 28|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ w_odometry_suspicious : 29|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ w_gnss_antennas_out_of_range : 30|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ w_no_gnss_period_estimate : 31|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ w_front_gnss_comms : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ w_rear_gnss_comms : 33|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ no_engine_state : 34|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 35|5@1+ (1,0) [0|31] "" Vector__XXX
+SG_ st_lidar_slam_no_data_can : 40|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ st_lidar_slam_no_kf : 41|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ st_cam_slam_no_data_can : 42|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ st_cam_slam_no_kf : 43|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved1 : 44|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ st_using_front_gnss : 46|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ st_using_rear_gnss : 47|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ st_using_lidar_slam : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ st_using_cam_slam : 49|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ st_using_imu_heading : 50|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved2 : 51|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ st_dead_reckoning : 52|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved3 : 53|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ st_external_reset : 55|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1829 ErrorFusionDebugMsg: 8 Vector__XXX
+SG_ fusdebugReset : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ initialisation : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ steerAngleFrontInvalid : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ steerAngleRearInvalid : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ wheelSpeedInvalid : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ timeStepSizeInvalid : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ huge_sensor_update : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved : 7|2@1+ (1,0) [0|3] "" Vector__XXX
+SG_ speedNotAvailableButNotZero : 9|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ slamFwdStdDevNonPositive : 10|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ slamLatStdDevNonPositive : 11|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ slamHeadStdDevNonPositive : 12|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ fusionConflictingInputs : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ saved_antenna_offset_missing : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ safety_relay_open : 15|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ drive_info_comms : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved1 : 17|15@1+ (1,0) [0|32767] "" Vector__XXX
+SG_ cholesky_failed_veh : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ innovation_covariance_not_psd_ve : 33|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ choleskey_failed_odo : 34|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ innovation_convariance_not_psd_o : 35|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ steer_angle_front_unavailable : 36|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ steer_angle_rear_unavailable : 37|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ rtk_front_no_data_ubx : 38|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ rtk_rear_no_data_ubx : 39|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ rtk_front_no_data_can : 40|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ rtk_rear_no_data_can : 41|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ dead_reckoning : 42|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ odometry_suspicious : 43|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ reserved2 : 44|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ gnss_antennas_out_of_range : 45|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ using_lidar_slam : 46|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ using_gps : 47|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ fusion_initialisable : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 2032 AnyExceptionMsg: 8 Vector__XXX
+SG_ moduleId : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ taskId : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ debug : 16|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+

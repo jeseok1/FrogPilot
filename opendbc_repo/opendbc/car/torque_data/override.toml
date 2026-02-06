@@ -40,6 +40,9 @@ legend = ["LAT_ACCEL_FACTOR", "MAX_LAT_ACCEL_MEASURED", "FRICTION"]
 # No steering wheel
 "COMMA_BODY" = [nan, 1000, nan]
 
+# Lotte shuttle (angle control, low-speed vehicle)
+"LOTTE_SHUTTLE" = [nan, 3.0, nan]
+
 # Totally new cars
 "RAM_1500_5TH_GEN" = [2.0, 2.0, 0.05]
 "RAM_HD_5TH_GEN" = [1.4, 1.4, 0.05]

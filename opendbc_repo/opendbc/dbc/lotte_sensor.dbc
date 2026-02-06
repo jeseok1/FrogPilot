@@ -1,0 +1,99 @@
+VERSION ""
+
+NS_ :
+
+BS_:
+
+BU_: Xsens_IMU RPi_GPS Autoware
+
+BO_ 17 StatusWord: 4 Xsens_IMU
+ SG_ SelfTestOk : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ OrientationValid : 25|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ClipAccX : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ClipAccY : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ClipAccZ : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ClipGyrX : 19|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ClipGyrY : 20|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ClipGyrZ : 21|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ FilterMode : 1|3@0+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 34 EulerAngles: 6 Xsens_IMU
+ SG_ roll : 7|16@0- (0.0078125,0) [-180|180] "deg" Vector__XXX
+ SG_ pitch : 23|16@0- (0.0078125,0) [-90|90] "deg" Vector__XXX
+ SG_ yaw : 39|16@0- (0.0078125,0) [-180|180] "deg" Vector__XXX
+
+BO_ 50 RateOfTurn: 6 Xsens_IMU
+ SG_ gyrX : 7|16@0- (0.001953125,0) [0|0] "rad/s" Vector__XXX
+ SG_ gyrY : 23|16@0- (0.001953125,0) [0|0] "rad/s" Vector__XXX
+ SG_ gyrZ : 39|16@0- (0.001953125,0) [0|0] "rad/s" Vector__XXX
+
+BO_ 52 Acceleration: 6 Xsens_IMU
+ SG_ accX : 7|16@0- (0.00390625,0) [-100|100] "m/s2" Vector__XXX
+ SG_ accY : 23|16@0- (0.00390625,0) [-100|100] "m/s2" Vector__XXX
+ SG_ accZ : 39|16@0- (0.00390625,0) [-100|100] "m/s2" Vector__XXX
+
+BO_ 53 FreeAcceleration: 6 Xsens_IMU
+ SG_ FreeAccX : 7|16@0- (0.00390625,0) [-100|100] "m/s2" Vector__XXX
+ SG_ FreeAccY : 23|16@0- (0.00390625,0) [-100|100] "m/s2" Vector__XXX
+ SG_ FreeAccZ : 39|16@0- (0.00390625,0) [-100|100] "m/s2" Vector__XXX
+
+BO_ 256 GnssAntenna1Pos: 8 RPi_GPS
+ SG_ latitude : 0|32@1- (1e-7,0) [-214.7|214.7] "deg" Vector__XXX
+ SG_ longitude : 32|32@1- (1e-7,0) [-214.7|214.7] "deg" Vector__XXX
+
+BO_ 257 GnssAntenna2Pos: 8 RPi_GPS
+ SG_ latitude : 0|32@1- (1e-7,0) [-214.7|214.7] "deg" Vector__XXX
+ SG_ longitude : 32|32@1- (1e-7,0) [-214.7|214.7] "deg" Vector__XXX
+
+BO_ 258 GnssHeadingSpeed: 8 RPi_GPS
+ SG_ heading : 0|16@1+ (0.01,0) [0|359.99] "deg" Vector__XXX
+ SG_ speed : 16|16@1+ (0.001,0) [0|65.535] "m/s" Vector__XXX
+ SG_ altitude : 32|24@1- (0.001,0) [-8388|8388] "m" Vector__XXX
+ SG_ fixType : 56|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ numSat : 59|5@1+ (1,0) [0|31] "" Vector__XXX
+
+BO_ 259 GnssAccuracy: 8 RPi_GPS
+ SG_ hAcc : 0|16@1+ (0.001,0) [0|65.535] "m" Vector__XXX
+ SG_ vAcc : 16|16@1+ (0.001,0) [0|65.535] "m" Vector__XXX
+ SG_ headingAcc : 32|16@1+ (0.01,0) [0|655.35] "deg" Vector__XXX
+ SG_ baseline : 48|16@1+ (0.001,0) [0|65.535] "m" Vector__XXX
+
+BO_ 260 GnssDualAntennaPitch: 4 RPi_GPS
+ SG_ pitch : 0|16@1- (0.01,0) [-327.67|327.67] "deg" Vector__XXX
+ SG_ pitchAcc : 16|16@1+ (0.01,0) [0|655.35] "deg" Vector__XXX
+
+BO_ 261 GnssVrsStatus: 8 RPi_GPS
+ SG_ ntripConnected : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ diffAge : 1|15@1+ (0.01,0) [0|327.67] "sec" Vector__XXX
+ SG_ baseId : 16|16@1+ (1,0) [0|65535] "" Vector__XXX
+ SG_ rtcmMsgRate : 32|8@1+ (1,0) [0|255] "Hz" Vector__XXX
+ SG_ mountpoint : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ reserved : 48|16@1+ (1,0) [0|65535] "" Vector__XXX
+
+BO_ 512 AutowareCommand: 8 Autoware
+ SG_ target_accel : 0|16@1- (0.001,0) [-32.767|32.767] "m/s2" Vector__XXX
+ SG_ target_steer_angle : 16|16@1- (0.01,0) [-327.67|327.67] "deg" Vector__XXX
+ SG_ enabled : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ counter : 33|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ reserved : 40|24@1+ (1,0) [0|16777215] "" Vector__XXX
+
+CM_ BU_ Xsens_IMU "Xsens MTi-630R IMU sensor (IMU only, no GNSS)";
+CM_ BU_ RPi_GPS "Raspberry Pi CAN bridge for UM982 dual-antenna RTK GPS + VRS";
+CM_ BU_ Autoware "Autoware upper-level controller commands";
+CM_ BO_ 17 "Xsens status word with self-test and orientation validity";
+CM_ BO_ 34 "Euler angles from Xsens AHRS filter";
+CM_ BO_ 50 "Angular rate of turn from Xsens gyroscope";
+CM_ BO_ 52 "Acceleration including gravity from Xsens accelerometer";
+CM_ BO_ 53 "Free acceleration (gravity-compensated) from Xsens";
+CM_ BO_ 256 "Primary antenna (Antenna 1) position from UM982";
+CM_ BO_ 257 "Secondary antenna (Antenna 2) position from UM982";
+CM_ BO_ 258 "Dual-antenna heading, ground speed, altitude and fix info";
+CM_ BO_ 259 "Position accuracy estimates from UM982";
+CM_ BO_ 260 "Dual-antenna pitch angle from UM982";
+CM_ BO_ 261 "VRS NTRIP correction status from Raspberry Pi";
+CM_ BO_ 512 "Target acceleration and steering angle from Autoware";
+
+VAL_ 17 SelfTestOk 0 "false" 1 "true" ;
+VAL_ 17 OrientationValid 0 "false" 1 "true" ;
+VAL_ 258 fixType 0 "none" 2 "3D" 4 "RTK_float" 5 "RTK_fixed" ;
+
