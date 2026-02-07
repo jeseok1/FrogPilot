@@ -179,7 +179,6 @@ class HudRenderer(Widget):
       self._draw_set_speed(rect)
 
     self._draw_steering_wheel(rect)
-    self._draw_steer_debug(rect)
 
   def _draw_steering_wheel(self, rect: rl.Rectangle) -> None:
     wheel_txt = self._txt_wheel_critical if self._show_wheel_critical else self._txt_wheel
@@ -222,39 +221,6 @@ class HudRenderer(Widget):
       exclamation_pos_x = pos_x - self._txt_exclamation_point.width / 2 + wheel_txt.width / 2 + EXCLAMATION_POINT_SPACING
       exclamation_pos_y = pos_y - self._txt_exclamation_point.height / 2
       rl.draw_texture(self._txt_exclamation_point, int(exclamation_pos_x), int(exclamation_pos_y), rl.WHITE)
-
-  def _draw_steer_debug(self, rect: rl.Rectangle) -> None:
-    """Draw steering torque debug info at bottom-left."""
-    sm = ui_state.sm
-    car_output = sm['carOutput']
-    car_state = sm['carState']
-    car_control = sm['carControl']
-
-    torque_out = car_output.actuatorsOutput.torqueOutputCan
-    torque_norm = car_output.actuatorsOutput.torque
-    driver_torque = car_state.steeringTorque
-    angle_deg = car_state.steeringAngleDeg
-    lat_active = car_control.latActive
-
-    font_size = 28
-    font = self._font_semi_bold
-    line_h = 32
-    x = int(rect.x + 85)
-    y = int(rect.y + rect.height - 14 - 50 - line_h * 3)
-
-    # background
-    bg_w, bg_h = 220, line_h * 3 + 12
-    rl.draw_rectangle(x - 6, y - 4, bg_w, bg_h, rl.Color(0, 0, 0, 120))
-
-    # color: green if active, grey if not
-    color = rl.Color(128, 216, 166, 220) if lat_active else rl.Color(180, 180, 180, 180)
-
-    # Line 1: Applied torque (CAN value)
-    rl.draw_text_ex(font, f"STEER {int(torque_out):+4d}", rl.Vector2(x, y), font_size, 0, color)
-    # Line 2: Normalized torque percentage
-    rl.draw_text_ex(font, f"TORQ  {torque_norm:+.2f}", rl.Vector2(x, y + line_h), font_size, 0, color)
-    # Line 3: Driver torque + steering angle
-    rl.draw_text_ex(font, f"DRV {driver_torque:+.0f}  {angle_deg:+.1f}\u00b0", rl.Vector2(x, y + line_h * 2), font_size, 0, color)
 
   def _draw_set_speed(self, rect: rl.Rectangle) -> None:
     """Draw the MAX speed indicator box."""

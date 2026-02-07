@@ -26,13 +26,11 @@ FW_VERSIONS = {
       b'\xf1\x00IGH MFC  AT KOR LHD 1.00 1.00 99211-G8000 180903',
       b'\xf1\x00IGH MFC  AT KOR LHD 1.00 1.01 99211-G8000 181109',
       b'\xf1\x00IGH MFC  AT KOR LHD 1.00 1.02 99211-G8100 191029',
-      b'\xf1\x00IGH MFC  AT KOR LHD 1.00 1.04 99211-G8100 200511',
     ],
     (Ecu.eps, 0x7d4, None): [
       b'\xf1\x00IG  MDPS C 1.00 1.00 56310M9600\x00 4IHSC100',
       b'\xf1\x00IG  MDPS C 1.00 1.01 56310M9350\x00 4IH8C101',
       b'\xf1\x00IG  MDPS C 1.00 1.02 56310M9350\x00 4IH8C102',
-      b'\xf1\x00IG  MDPS C 1.00 1.00 56310M9500\x00 4IHSC100',
     ],
     (Ecu.fwdRadar, 0x7d0, None): [
       b'\xf1\x00IGhe SCC FHCUP      1.00 1.00 99110-M9100         ',

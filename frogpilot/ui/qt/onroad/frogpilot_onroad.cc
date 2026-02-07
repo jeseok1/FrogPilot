@@ -19,15 +19,9 @@ void FrogPilotOnroadWindow::updateState(const UIState &s, const FrogPilotUIState
   const cereal::CarState::Reader &carState = sm["carState"].getCarState();
   const cereal::CarControl::Reader &carControl = fpsm["carControl"].getCarControl();
 
-  const cereal::CarOutput::Reader &carOutput = fpsm["carOutput"].getCarOutput();
-
   blindSpotLeft = carState.getLeftBlindspot();
   blindSpotRight = carState.getRightBlindspot();
-  latActive = carControl.getLatActive();
-  steeringAngleDeg = carState.getSteeringAngleDeg();
-  steeringTorque = carState.getSteeringTorque();
   torque = -carControl.getActuators().getTorque();
-  torqueOutputCan = carOutput.getActuatorsOutput().getTorqueOutputCan();
   turnSignalLeft = carState.getLeftBlinker();
   turnSignalRight = carState.getRightBlinker();
 
@@ -103,7 +97,6 @@ void FrogPilotOnroadWindow::paintEvent(QPaintEvent *event) {
 
   if (showSteering) {
     paintSteeringTorqueBorder(p);
-    paintSteeringDebugText(p);
   }
 
   if (showBlindspot || showSignal) {
@@ -143,37 +136,6 @@ void FrogPilotOnroadWindow::paintSteeringTorqueBorder(QPainter &p) {
   int yPos = rect.y() + rect.height() - visibleHeight;
 
   p.fillRect(QRect(xPos, yPos, UI_BORDER_SIZE, visibleHeight), gradient);
-
-  p.restore();
-}
-
-void FrogPilotOnroadWindow::paintSteeringDebugText(QPainter &p) {
-  p.save();
-  p.setClipRect(rect);
-
-  int fontSize = 28;
-  int lineHeight = 34;
-  int x = rect.x() + UI_BORDER_SIZE + 16;
-  int y = rect.bottom() - UI_BORDER_SIZE - lineHeight * 3 - 8;
-
-  // background
-  int bgW = 230;
-  int bgH = lineHeight * 3 + 12;
-  p.fillRect(QRect(x - 8, y - 4, bgW, bgH), QColor(0, 0, 0, 120));
-
-  QColor textColor = latActive ? QColor(128, 216, 166, 220) : QColor(180, 180, 180, 180);
-  p.setFont(InterFont(fontSize, QFont::DemiBold));
-  p.setPen(textColor);
-
-  // Line 1: Applied torque (CAN value)
-  p.drawText(x, y + lineHeight - 4, QString("STEER %1").arg(static_cast<int>(torqueOutputCan), 4, 10, QChar(' ')));
-  // Line 2: Normalized torque
-  p.drawText(x, y + lineHeight * 2 - 4, QString("TORQ  %1").arg(torque, 0, 'f', 2));
-  // Line 3: Driver torque + steering angle
-  p.drawText(x, y + lineHeight * 3 - 4, QString("DRV %1  %2%3")
-    .arg(static_cast<int>(steeringTorque), 3, 10, QChar(' '))
-    .arg(steeringAngleDeg, 0, 'f', 1)
-    .arg(QChar(0x00B0)));
 
   p.restore();
 }
