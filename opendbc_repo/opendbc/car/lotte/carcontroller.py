@@ -8,7 +8,7 @@ from opendbc.car.lotte import lottecan
 from opendbc.car.lotte.values import (
   ACCEL_TO_TORQUE_KF, ACCEL_PID_KP, ACCEL_PID_KI, ACCEL_PID_KD,
   ACCEL_PID_OUTPUT_LIMIT, BRAKE_PRESSURE_GAIN, MAX_BRAKE_PRESSURE,
-  MAX_STEER_ANGLE, STARTING_TORQUE_PCT, STARTING_FADE_END,
+  MAX_STEER_ANGLE, MAX_TORQUE_PCT, STARTING_TORQUE_PCT, STARTING_FADE_END,
   MASS, GRAVITY, GEAR_RATIO, TIRE_RADIUS, MAX_TORQUE,
 )
 from opendbc.car.interfaces import CarControllerBase
@@ -86,7 +86,7 @@ class CarController(CarControllerBase):
           starting_floor = STARTING_TORQUE_PCT * fade
           torque_pct = max(torque_pct, starting_floor)
 
-        torque_pct = float(np.clip(torque_pct, 0, 100))
+        torque_pct = float(np.clip(torque_pct, 0, MAX_TORQUE_PCT))
       else:
         # Braking
         brake_pressure = float(np.clip(-target_accel * BRAKE_PRESSURE_GAIN, 0, MAX_BRAKE_PRESSURE))

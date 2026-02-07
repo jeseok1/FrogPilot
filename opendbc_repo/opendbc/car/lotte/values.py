@@ -11,6 +11,7 @@ MAX_STEER_ANGLE = 19.05  # deg
 RPM_TO_MS = 2.0 * 3.14159265 * TIRE_RADIUS / (GEAR_RATIO * 60.0)  # ~0.002104
 
 # Control constants
+MAX_TORQUE_PCT = 70.0  # %, software torque limit (105 Nm) — tune on vehicle
 V_EGO_STARTING = 0.3  # m/s
 STARTING_TORQUE_PCT = 25.0  # %
 STARTING_FADE_END = 1.0  # m/s, starting torque floor fades to 0 by this speed

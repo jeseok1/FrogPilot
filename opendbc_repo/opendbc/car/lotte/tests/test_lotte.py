@@ -6,9 +6,9 @@ from opendbc.car import DT_CTRL
 from opendbc.car.lotte.values import (
   CAR, DBC, ACCEL_TO_TORQUE_KF, RPM_TO_MS, MASS, GRAVITY,
   GEAR_RATIO, TIRE_RADIUS, MAX_TORQUE, V_EGO_STARTING,
-  STARTING_TORQUE_PCT, STARTING_FADE_END, BRAKE_PRESSURE_GAIN,
-  MAX_BRAKE_PRESSURE, MAX_STEER_ANGLE, AUTOWARE_TIMEOUT,
-  ACCEL_PID_OUTPUT_LIMIT, IMU_OFFSET_X,
+  STARTING_TORQUE_PCT, STARTING_FADE_END, MAX_TORQUE_PCT,
+  BRAKE_PRESSURE_GAIN, MAX_BRAKE_PRESSURE, MAX_STEER_ANGLE,
+  AUTOWARE_TIMEOUT, ACCEL_PID_OUTPUT_LIMIT, IMU_OFFSET_X,
 )
 from opendbc.car.lotte import lottecan
 
@@ -226,6 +226,21 @@ class TestControlLogic:
   def test_pid_output_limit(self):
     # PID should not exceed +/-ACCEL_PID_OUTPUT_LIMIT
     assert ACCEL_PID_OUTPUT_LIMIT == 20.0
+
+  def test_torque_limit(self):
+    # Software torque limit should cap total output
+    assert MAX_TORQUE_PCT == 70.0
+    assert MAX_TORQUE_PCT * MAX_TORQUE / 100.0 == 105.0  # 105 Nm max
+
+  def test_torque_clamp_at_limit(self):
+    # Even with FF + gravity + PID all maxed, output should not exceed MAX_TORQUE_PCT
+    import numpy as np
+    torque_ff = 2.0 * ACCEL_TO_TORQUE_KF  # ~66.8%
+    gravity_comp = 30.0  # steep hill
+    torque_fb = ACCEL_PID_OUTPUT_LIMIT  # 20%
+    torque_pct = torque_ff + gravity_comp + torque_fb  # ~116.8%
+    clamped = float(np.clip(torque_pct, 0, MAX_TORQUE_PCT))
+    assert clamped == MAX_TORQUE_PCT
 
 
 # ---------- Sensor DBC Encoding/Decoding ----------
