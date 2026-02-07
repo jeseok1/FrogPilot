@@ -21,6 +21,7 @@ public:
 private:
   void paintEvent(QPaintEvent *event);
   void paintFPS(QPainter &p);
+  void paintSteeringDebugText(QPainter &p);
   void paintSteeringTorqueBorder(QPainter &p);
   void paintTurnSignalBorder(QPainter &p);
   void resizeEvent(QResizeEvent *event);
@@ -35,8 +36,13 @@ private:
   bool turnSignalLeft;
   bool turnSignalRight;
 
+  bool latActive;
+
   float smoothedSteer;
+  float steeringAngleDeg;
+  float steeringTorque;
   float torque;
+  float torqueOutputCan;
 
   QColor leftBorderColor;
   QColor rightBorderColor;

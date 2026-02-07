@@ -118,9 +118,10 @@ def create_clu11(packer, frame, clu11, button, CP):
   return packer.make_can_msg("CLU11", bus, values)
 
 
-def create_lfahda_mfc(packer, enabled):
+def create_lfahda_mfc(packer, enabled, lat_active=False):
   values = {
-    "LFA_Icon_State": 2 if enabled else 0,
+    # 0: no icon, 1: white steering wheel (ready), 2: green steering wheel (active)
+    "LFA_Icon_State": 2 if lat_active else (1 if enabled else 0),
   }
   return packer.make_can_msg("LFAHDA_MFC", 0, values)
 
