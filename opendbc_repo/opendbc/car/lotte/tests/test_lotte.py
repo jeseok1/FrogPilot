@@ -2,12 +2,13 @@ import math
 import pytest
 
 from opendbc.can import CANPacker, CANParser
+from opendbc.car import DT_CTRL
 from opendbc.car.lotte.values import (
   CAR, DBC, ACCEL_TO_TORQUE_KF, RPM_TO_MS, MASS, GRAVITY,
   GEAR_RATIO, TIRE_RADIUS, MAX_TORQUE, V_EGO_STARTING,
   STARTING_TORQUE_PCT, STARTING_FADE_END, BRAKE_PRESSURE_GAIN,
   MAX_BRAKE_PRESSURE, MAX_STEER_ANGLE, AUTOWARE_TIMEOUT,
-  ACCEL_PID_OUTPUT_LIMIT,
+  ACCEL_PID_OUTPUT_LIMIT, IMU_OFFSET_X,
 )
 from opendbc.car.lotte import lottecan
 
@@ -329,6 +330,78 @@ class TestSensorDBC:
     addr, dat, bus = packer.make_can_msg('RateOfTurn', 1, values)
     parser_imu.update([(1, [(addr, dat, bus)])])
     assert abs(parser_imu.vl['RateOfTurn']['gyrZ'] - 0.15) < 0.005
+
+
+# ---------- IMU Offset Compensation ----------
+
+class TestIMUOffsetCompensation:
+  def test_offset_constant(self):
+    assert IMU_OFFSET_X == -1.0
+
+  def test_accx_centripetal_correction(self):
+    # During turn: ωz=0.5 rad/s, raw accX=1.0
+    # centripetal = ωz² · IMU_OFFSET_X = 0.25 * (-1.0) = -0.25
+    # corrected = 1.0 + (-0.25) = 0.75
+    raw_accel_x = 1.0
+    yaw_rate = 0.5
+    centripetal_x = yaw_rate ** 2 * IMU_OFFSET_X
+    corrected = raw_accel_x + centripetal_x
+    assert abs(corrected - 0.75) < 1e-6
+
+  def test_accx_no_correction_straight(self):
+    # Straight driving: ωz=0, no correction needed
+    raw_accel_x = 1.5
+    yaw_rate = 0.0
+    centripetal_x = yaw_rate ** 2 * IMU_OFFSET_X
+    corrected = raw_accel_x + centripetal_x
+    assert corrected == raw_accel_x
+
+  def test_accx_correction_magnitude(self):
+    # At tight turn: ωz=0.56 rad/s (20km/h, R=10m)
+    # correction = 0.56² * 1.0 = 0.31 m/s² (~1% of g)
+    yaw_rate = 0.56
+    correction = abs(yaw_rate ** 2 * IMU_OFFSET_X)
+    assert 0.25 < correction < 0.4
+
+  def test_accy_euler_correction(self):
+    # Turn entry: αz=1.0 rad/s² (yaw angular acceleration)
+    # euler_y = αz · IMU_OFFSET_X = 1.0 * (-1.0) = -1.0
+    # corrected = raw_accY - euler_y = 0.0 - (-1.0) = 1.0
+    raw_accel_y = 0.0
+    prev_yaw_rate = 0.0
+    curr_yaw_rate = 1.0 * DT_CTRL  # αz=1.0 for one step
+    yaw_accel = (curr_yaw_rate - prev_yaw_rate) / DT_CTRL  # = 1.0
+    euler_y = yaw_accel * IMU_OFFSET_X  # = -1.0
+    corrected = raw_accel_y - euler_y  # = 0.0 - (-1.0) = 1.0
+    assert abs(corrected - 1.0) < 1e-6
+
+  def test_accy_no_correction_steady_turn(self):
+    # Steady turn: constant ωz → αz=0, no Euler correction
+    raw_accel_y = 2.0
+    prev_yaw_rate = 0.5
+    curr_yaw_rate = 0.5
+    yaw_accel = (curr_yaw_rate - prev_yaw_rate) / DT_CTRL
+    euler_y = yaw_accel * IMU_OFFSET_X
+    corrected = raw_accel_y - euler_y
+    assert corrected == raw_accel_y
+
+  def test_both_corrections_during_turn_entry(self):
+    # Turn entry: ωz goes from 0 to 0.5 in one step
+    raw_accel_x = 1.0
+    raw_accel_y = 0.0
+    prev_yaw_rate = 0.0
+    curr_yaw_rate = 0.5
+
+    # accX: centripetal
+    centripetal_x = curr_yaw_rate ** 2 * IMU_OFFSET_X
+    corrected_x = raw_accel_x + centripetal_x
+    assert corrected_x < raw_accel_x  # centripetal removed
+
+    # accY: Euler
+    yaw_accel = (curr_yaw_rate - prev_yaw_rate) / DT_CTRL
+    euler_y = yaw_accel * IMU_OFFSET_X
+    corrected_y = raw_accel_y - euler_y
+    assert corrected_y != raw_accel_y  # Euler correction applied
 
 
 # ---------- Autoware Switching Logic ----------

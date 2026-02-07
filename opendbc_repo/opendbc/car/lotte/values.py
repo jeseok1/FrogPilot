@@ -28,6 +28,9 @@ ACCEL_PID_OUTPUT_LIMIT = 20.0  # % torque
 MASS = 2500.0  # kg (estimated)
 GRAVITY = 9.81  # m/s^2
 
+# IMU mounting offset (from vehicle CG, negative = behind)
+IMU_OFFSET_X = -1.0  # m
+
 # Autoware command
 AUTOWARE_TIMEOUT = 0.1  # seconds
 

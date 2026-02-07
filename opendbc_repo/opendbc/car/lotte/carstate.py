@@ -3,20 +3,22 @@ import time
 
 from cereal import custom
 from opendbc.can import CANParser
-from opendbc.car import Bus, structs
+from opendbc.car import Bus, DT_CTRL, structs
 from opendbc.car.interfaces import CarStateBase
-from opendbc.car.lotte.values import DBC, RPM_TO_MS, AUTOWARE_TIMEOUT
+from opendbc.car.lotte.values import DBC, RPM_TO_MS, AUTOWARE_TIMEOUT, IMU_OFFSET_X
 
 
 class CarState(CarStateBase):
   def __init__(self, CP, FPCP):
     super().__init__(CP, FPCP)
 
-    # IMU data
+    # IMU data (offset-compensated)
     self.imu_accel_x = 0.0
+    self.imu_accel_y = 0.0
     self.imu_pitch = 0.0
     self.imu_yaw_rate = 0.0
     self.imu_valid = False
+    self._prev_yaw_rate = 0.0
 
     # GPS data
     self.gps_speed = 0.0
@@ -93,13 +95,30 @@ class CarState(CarStateBase):
 
     # --- Bus 1: Sensor CAN ---
 
-    # Xsens IMU
-    self.imu_accel_x = cp_sensor.vl['Acceleration']['accX']
+    # Xsens IMU (raw readings)
+    raw_accel_x = cp_sensor.vl['Acceleration']['accX']
+    raw_accel_y = cp_sensor.vl['Acceleration']['accY']
     self.imu_pitch = cp_sensor.vl['EulerAngles']['pitch']
-    self.imu_yaw_rate = cp_sensor.vl['RateOfTurn']['gyrZ']
+    raw_yaw_rate = cp_sensor.vl['RateOfTurn']['gyrZ']
     self.imu_valid = bool(cp_sensor.vl['StatusWord']['SelfTestOk'] and
                           cp_sensor.vl['StatusWord']['OrientationValid'])
 
+    # IMU offset compensation: IMU is mounted at IMU_OFFSET_X from CG
+    # Rigid body: a_IMU = a_CG + α×r + ω×(ω×r)
+    #   accX_CG = accX_IMU + ωz² · IMU_OFFSET_X  (centripetal)
+    #   accY_CG = accY_IMU - αz  · IMU_OFFSET_X  (Euler)
+    if self.imu_valid:
+      centripetal_x = raw_yaw_rate ** 2 * IMU_OFFSET_X
+      yaw_accel = (raw_yaw_rate - self._prev_yaw_rate) / DT_CTRL
+      euler_y = yaw_accel * IMU_OFFSET_X
+      self.imu_accel_x = raw_accel_x + centripetal_x
+      self.imu_accel_y = raw_accel_y - euler_y
+    else:
+      self.imu_accel_x = raw_accel_x
+      self.imu_accel_y = raw_accel_y
+
+    self._prev_yaw_rate = raw_yaw_rate
+    self.imu_yaw_rate = raw_yaw_rate
     ret.yawRate = self.imu_yaw_rate  # rad/s (openpilot expects rad/s)
 
     # GPS
