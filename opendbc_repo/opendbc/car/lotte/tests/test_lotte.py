@@ -118,11 +118,11 @@ class TestLotteCan:
 
   def test_brake_counter_wraps(self, packer):
     # counter is 4-bit (0-15)
-    addr1, _, _ = lottecan.create_brake_command(packer, 10.0, 15, True)
-    addr2, _, _ = lottecan.create_brake_command(packer, 10.0, 16, True)
+    _addr1, _dat1, _bus1 = lottecan.create_brake_command(packer, 10.0, 15, True)
+    addr2, dat2, bus2 = lottecan.create_brake_command(packer, 10.0, 16, True)
     # counter 16 & 0xF = 0
     parser = CANParser('lotte_shuttle_chassis', [('EHBReqMsg', 0)], 0)
-    parser.update([(0, [(addr2, _, 0)])])
+    parser.update([(0, [(addr2, dat2, bus2)])])
     assert parser.vl['EHBReqMsg']['counter'] == 0
 
   def test_epb_engage(self, packer):
@@ -165,7 +165,7 @@ class TestControlLogic:
     gravity_comp = MASS * GRAVITY * math.sin(pitch_rad) * TIRE_RADIUS / (GEAR_RATIO * MAX_TORQUE) * 100.0
     # Should add positive torque to overcome gravity
     assert gravity_comp > 0
-    assert 2.0 < gravity_comp < 10.0  # reasonable range for 5 deg
+    assert 20.0 < gravity_comp < 35.0  # ~28.6% for 2500kg shuttle at 5 deg
 
   def test_gravity_comp_downhill(self):
     # -5 degree downhill

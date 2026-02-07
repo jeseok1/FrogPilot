@@ -38,9 +38,8 @@ class CarControllerParams:
 
 class CAR(Platforms):
   LOTTE_SHUTTLE = PlatformConfig(
-    [CarDocs("Lotte Shuttle")],
-    CarSpecs(mass=MASS, wheelbase=3.0, steerRatio=1.0,
-             centerToFrontRatio=0.5, maxSteeringAngleDeg=MAX_STEER_ANGLE),
+    [CarDocs("Lotte Shuttle", package="All")],
+    CarSpecs(mass=MASS, wheelbase=3.0, steerRatio=1.0, centerToFrontRatio=0.5),
     {Bus.main: 'lotte_shuttle_chassis', Bus.adas: 'lotte_sensor'},
   )
 
