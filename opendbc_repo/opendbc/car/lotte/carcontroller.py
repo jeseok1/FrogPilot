@@ -8,7 +8,7 @@ from opendbc.car.lotte import lottecan
 from opendbc.car.lotte.values import (
   ACCEL_TO_TORQUE_KF, ACCEL_PID_KP, ACCEL_PID_KI, ACCEL_PID_KD,
   ACCEL_PID_OUTPUT_LIMIT, BRAKE_PRESSURE_GAIN, MAX_BRAKE_PRESSURE,
-  MAX_STEER_ANGLE, V_EGO_STARTING, STARTING_TORQUE_PCT,
+  MAX_STEER_ANGLE, STARTING_TORQUE_PCT, STARTING_FADE_END,
   MASS, GRAVITY, GEAR_RATIO, TIRE_RADIUS, MAX_TORQUE,
 )
 from opendbc.car.interfaces import CarControllerBase
@@ -78,9 +78,13 @@ class CarController(CarControllerBase):
         # 4) Combine
         torque_pct = torque_ff + gravity_comp + torque_fb
 
-        # 5) Starting torque guarantee
-        if target_accel > 0 and CS.out.vEgo < V_EGO_STARTING:
-          torque_pct = max(torque_pct, STARTING_TORQUE_PCT)
+        # 5) Starting torque guarantee (smooth fade-out to avoid torque dip)
+        #    Full floor at vEgo=0, linearly fades to 0 at vEgo=STARTING_FADE_END
+        #    so PID integrator has time to wind up before floor is fully released
+        if target_accel > 0 and CS.out.vEgo < STARTING_FADE_END:
+          fade = max(0.0, 1.0 - CS.out.vEgo / STARTING_FADE_END)
+          starting_floor = STARTING_TORQUE_PCT * fade
+          torque_pct = max(torque_pct, starting_floor)
 
         torque_pct = float(np.clip(torque_pct, 0, 100))
       else:

@@ -13,6 +13,7 @@ RPM_TO_MS = 2.0 * 3.14159265 * TIRE_RADIUS / (GEAR_RATIO * 60.0)  # ~0.002104
 # Control constants
 V_EGO_STARTING = 0.3  # m/s
 STARTING_TORQUE_PCT = 25.0  # %
+STARTING_FADE_END = 1.0  # m/s, starting torque floor fades to 0 by this speed
 ACCEL_TO_TORQUE_KF = 2500.0 * TIRE_RADIUS / (GEAR_RATIO * MAX_TORQUE) * 100.0  # ~33.4 %/(m/s^2)
 BRAKE_PRESSURE_GAIN = 20.0  # bar/(m/s^2), tuning required
 MAX_BRAKE_PRESSURE = 100.0  # bar

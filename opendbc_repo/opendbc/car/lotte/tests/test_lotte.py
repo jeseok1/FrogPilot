@@ -5,8 +5,9 @@ from opendbc.can import CANPacker, CANParser
 from opendbc.car.lotte.values import (
   CAR, DBC, ACCEL_TO_TORQUE_KF, RPM_TO_MS, MASS, GRAVITY,
   GEAR_RATIO, TIRE_RADIUS, MAX_TORQUE, V_EGO_STARTING,
-  STARTING_TORQUE_PCT, BRAKE_PRESSURE_GAIN, MAX_BRAKE_PRESSURE,
-  MAX_STEER_ANGLE, AUTOWARE_TIMEOUT, ACCEL_PID_OUTPUT_LIMIT,
+  STARTING_TORQUE_PCT, STARTING_FADE_END, BRAKE_PRESSURE_GAIN,
+  MAX_BRAKE_PRESSURE, MAX_STEER_ANGLE, AUTOWARE_TIMEOUT,
+  ACCEL_PID_OUTPUT_LIMIT,
 )
 from opendbc.car.lotte import lottecan
 
@@ -173,24 +174,37 @@ class TestControlLogic:
     gravity_comp = MASS * GRAVITY * math.sin(pitch_rad) * TIRE_RADIUS / (GEAR_RATIO * MAX_TORQUE) * 100.0
     assert gravity_comp < 0
 
-  def test_starting_torque_guarantee(self):
-    # When accel > 0 and vEgo < V_EGO_STARTING, torque should be at least STARTING_TORQUE_PCT
-    accel = 0.1  # very small accel request
+  def test_starting_torque_guarantee_at_standstill(self):
+    # At vEgo=0, full starting torque floor applied
+    accel = 0.1
     torque_ff = accel * ACCEL_TO_TORQUE_KF  # ~3.3%
-    assert torque_ff < STARTING_TORQUE_PCT
-    torque = max(torque_ff, STARTING_TORQUE_PCT)
-    assert torque == STARTING_TORQUE_PCT
+    vEgo = 0.0
+    fade = max(0.0, 1.0 - vEgo / STARTING_FADE_END)
+    starting_floor = STARTING_TORQUE_PCT * fade
+    torque = max(torque_ff, starting_floor)
+    assert torque == STARTING_TORQUE_PCT  # full 25%
 
-  def test_starting_torque_not_applied_at_speed(self):
-    # When vEgo >= V_EGO_STARTING, starting torque should NOT override
-    accel = 0.5
-    torque_ff = accel * ACCEL_TO_TORQUE_KF  # ~16.7%
-    vEgo = 1.0  # above V_EGO_STARTING
-    if accel > 0 and vEgo < V_EGO_STARTING:
-      torque = max(torque_ff, STARTING_TORQUE_PCT)
-    else:
-      torque = torque_ff
-    assert torque == torque_ff  # no override
+  def test_starting_torque_fades_with_speed(self):
+    # At vEgo=0.5 (halfway to STARTING_FADE_END=1.0), floor should be ~12.5%
+    vEgo = 0.5
+    fade = max(0.0, 1.0 - vEgo / STARTING_FADE_END)
+    starting_floor = STARTING_TORQUE_PCT * fade
+    assert abs(starting_floor - 12.5) < 0.1
+
+  def test_starting_torque_gone_at_fade_end(self):
+    # At vEgo >= STARTING_FADE_END, floor should be 0
+    vEgo = STARTING_FADE_END
+    fade = max(0.0, 1.0 - vEgo / STARTING_FADE_END)
+    starting_floor = STARTING_TORQUE_PCT * fade
+    assert starting_floor == 0.0
+
+  def test_no_torque_dip_at_transition(self):
+    # At vEgo=0.3 (old threshold), floor is still ~17.5% which bridges
+    # the gap until PID winds up
+    vEgo = V_EGO_STARTING
+    fade = max(0.0, 1.0 - vEgo / STARTING_FADE_END)
+    starting_floor = STARTING_TORQUE_PCT * fade
+    assert starting_floor > 15.0  # still significant floor at old threshold
 
   def test_brake_pressure_from_decel(self):
     decel = -2.0  # m/s^2
